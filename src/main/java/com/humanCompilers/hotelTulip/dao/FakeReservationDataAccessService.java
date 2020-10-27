@@ -1,12 +1,10 @@
 package com.humanCompilers.hotelTulip.dao;
 
 import com.humanCompilers.hotelTulip.model.Reservation;
+import com.humanCompilers.hotelTulip.model.Room;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Repository("fakeReservationDao")
 public class FakeReservationDataAccessService implements ReservationDao {
@@ -48,11 +46,13 @@ public class FakeReservationDataAccessService implements ReservationDao {
                     int indexOfAreaToUpdate = DB_Reservations.indexOf(reservation);
                     if(indexOfAreaToUpdate >= 0) {
                         DB_Reservations.set(indexOfAreaToUpdate, new Reservation(id, updateReservation.getCheckinDate(),
-                                updateReservation.getCheckoutDate(), updateReservation.getReservedArea()));
+                                updateReservation.getCheckoutDate(), updateReservation.getReservedRoom(),
+                                updateReservation.getTotalPrice()));
                         return 1;
                     }
                     return 0;
                 })
                 .orElse(0);
     }
+
 }

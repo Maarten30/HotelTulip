@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <title>Contacto</title>
@@ -9,20 +9,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
         <!--Bootstrap CSS-->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <!--CSS-->
-        <link rel="stylesheet" href="../static/css/main.css">
+        <link rel="stylesheet" th:href="@{/css/main.css}">
         <!--<link th:href="@{/css/main.css}" rel="stylesheet"/>-->
         <!--Window image-->
-        <link rel="shortcut icon" href="../static/img/tulip.jpg" />
+        <link rel="shortcut icon" th:href="@{/img/tulip.jpg}" />
         <!--<link th:href="@{/img/tulip.jpg}" rel="shortcut icon">-->
         <!--Font-family-->
-        <link href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap" rel="stylesheet">
+        <link th:href="@{https://fonts.googleapis.com/css2?family=PT+Serif&display=swap}" rel="stylesheet">
 
         <!--Links and scripts for contact form-->
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link th:href="@{//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-css">
+        <script th:src="@{//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js}"></script>
+        <script th:src="@{//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js}"></script>
 
     </head>
     <body>
@@ -30,24 +30,24 @@
             <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="navbar-brand" href="reservas.html">RESERVAR</a>
+                        <a class="navbar-brand" th:href="@{/reservations}">RESERVAR</a>
                     </li>
                     <li class="nav-item">
-                        <a class="navbar-brand" href="tarifas.html">TARIFAS</a>
+                        <a class="navbar-brand" th:href="@{/tarifas}">TARIFAS</a>
                     </li>
                 </ul>
             </div>
             <div class="mx-auto order-0">
-                <a class="navbar-brand mx-auto font-weight-bold" href="index.html">HOTEL TULIP</a>
+                <a class="navbar-brand mx-auto font-weight-bold" th:href="@{/}">HOTEL TULIP</a>
                 <small class="form-text text-muted text-center">Human Compilers</small>
             </div>
             <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="navbar-brand" href="contacto.html">CONTACTO</a>
+                        <a class="navbar-brand" th:href="@{/contact}">CONTACTO</a>
                     </li>
                     <li class="nav-item">
-                        <a class="navbar-brand" href="inicioSesion.html">INICIAR SESIÓN</a>
+                        <a class="navbar-brand" th:href="@{/login}">INICIAR SESIÓN</a>
                     </li>
                 </ul>
             </div>
@@ -59,7 +59,7 @@
             <div class="container mt-5" >
                 <div class="row" style="height:550px;">
                     <div class="col-md-6 maps" >
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2903.072282068796!2d-1.995576784529552!3d43.31274627913435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd51b00759fb5f1b%3A0xae6526e78bd8449d!2sBaenako%20Dukea%20Pasealekua%2C%2020009%20Donostia%2C%20Gipuzkoa!5e0!3m2!1ses!2ses!4v1603808592564!5m2!1ses!2ses" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                        <iframe th:src="@{https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2903.072282068796!2d-1.995576784529552!3d43.31274627913435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd51b00759fb5f1b%3A0xae6526e78bd8449d!2sBaenako%20Dukea%20Pasealekua%2C%2020009%20Donostia%2C%20Gipuzkoa!5e0!3m2!1ses!2ses!4v1603808592564!5m2!1ses!2ses}" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
                     </div>
                     <div class="col-md-6">
                         <h2 class="text-uppercase mt-3 font-weight-bold text-black">CONTACTE CON NOSOTROS</h2>
@@ -108,7 +108,7 @@
                         <div class="text-black">
                             <h2 class="text-uppercase mt-4 font-weight-bold">Hotel Tulip</h2>
 
-                            <i class="fas fa-phone mt-3"></i> <a href="tel:+">(+34) 943 548789</a><br>
+                            <i class="fas fa-phone mt-3"></i> <a th:href="@{tel:+}">(+34) 943 548789</a><br>
                             <i class="fa fa-envelope mt-3"></i> <a href="">info@hoteltulip.eus</a><br>
                             <i class="fas fa-globe mt-3"></i> Baenako Dukea Pasealekua,3<br>
                             <i class="fas fa-globe mt-3"></i> 20009, Donostia-San Sebastián, Gipuzkoa<br>
@@ -119,7 +119,7 @@
         </div>
 
         <!--Javascript Bootstrap-->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+        <script th:src="@{https://code.jquery.com/jquery-3.5.1.slim.min.js}" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js}" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     </body>
 </html>

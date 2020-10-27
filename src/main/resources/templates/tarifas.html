@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <title>Tarifas</title>
@@ -9,15 +9,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
         <!--Bootstrap CSS-->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <!--CSS-->
-        <link rel="stylesheet" href="../static/css/main.css">
-        <!--<link th:href="@{/css/main.css}" rel="stylesheet"/>-->
+<!--        <link rel="stylesheet" href="../static/css/main.css">-->
+        <link th:href="@{/css/main.css}" rel="stylesheet"/>
         <!--Window image-->
-        <link rel="shortcut icon" href="../static/img/tulip.jpg" />
-        <!--<link th:href="@{/img/tulip.jpg}" rel="shortcut icon">-->
+<!--        <link rel="shortcut icon" href="../static/img/tulip.jpg" />-->
+        <link th:href="@{/img/tulip.jpg}" rel="shortcut icon">
         <!--Font-family-->
-        <link href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap" rel="stylesheet">
+        <link th:href="@{https://fonts.googleapis.com/css2?family=PT+Serif&display=swap}" rel="stylesheet">
 
     </head>
     <body>
@@ -25,24 +25,24 @@
             <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="navbar-brand" href="reservas.html">RESERVAR</a>
+                        <a class="navbar-brand" th:href="@{/reservations}">RESERVAR</a>
                     </li>
                     <li class="nav-item">
-                        <a class="navbar-brand" href="tarifas.html">TARIFAS</a>
+                        <a class="navbar-brand" th:href="@{/tarifas}">TARIFAS</a>
                     </li>
                 </ul>
             </div>
             <div class="mx-auto order-0">
-                <a class="navbar-brand mx-auto font-weight-bold" href="index.html">HOTEL TULIP</a>
+                <a class="navbar-brand mx-auto font-weight-bold" th:href="@{/}">HOTEL TULIP</a>
                 <small class="form-text text-muted text-center">Human Compilers</small>
             </div>
             <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="navbar-brand" href="contacto.html">CONTACTO</a>
+                        <a class="navbar-brand" th:href="@{/contact}">CONTACTO</a>
                     </li>
                     <li class="nav-item">
-                        <a class="navbar-brand" href="inicioSesion.html">INICIAR SESIÓN</a>
+                        <a class="navbar-brand" th:href="@{/login}">INICIAR SESIÓN</a>
                     </li>
                 </ul>
             </div>
@@ -54,8 +54,6 @@
             <h3 class="font-weight-bold">NUESTRAS HABITACIONES & SALAS</h3>
         </div>
         <hr>
-
-        <!--<img th:src="@{/img/habita1.jpg}" class="img-fluid" alt="hotel tulip">-->
 
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -70,28 +68,28 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="../static/img/habita1.jpg" class="d-block w-100" alt="hab1">
+                    <img th:src="@{/img/habita1.jpg}" class="d-block w-100" alt="hab1">
                 </div>
                 <div class="carousel-item">
-                    <img src="../static/img/habita2.jpg" class="d-block w-100" alt="hab2">
+                    <img th:src="@{/img/habita2.jpg}" class="d-block w-100" alt="hab2">
                 </div>
                 <div class="carousel-item">
-                    <img src="../static/img/habita3.jpg" class="d-block w-100" alt="hab3">
+                    <img th:src="@{/img/habita3.jpg}" class="d-block w-100" alt="hab3">
                 </div>
                 <div class="carousel-item">
-                    <img src="../static/img/habita4.jpg" class="d-block w-100" alt="hab4">
+                    <img th:src="@{/img/habita4.jpg}" class="d-block w-100" alt="hab4">
                 </div>
                 <div class="carousel-item">
-                    <img src="../static/img/sala1.jpg" class="d-block w-100" alt="hab4">
+                    <img th:src="@{/img/sala1.jpg}" class="d-block w-100" alt="hab4">
                 </div>
                 <div class="carousel-item">
-                    <img src="../static/img/sala2.jpg" class="d-block w-100" alt="hab4">
+                    <img th:src="@{/img/sala2.jpg}" class="d-block w-100" alt="hab4">
                 </div>
                 <div class="carousel-item">
-                    <img src="../static/img/sala3.jpg" class="d-block w-100" alt="hab4">
+                    <img th:src="@{/img/sala3.jpg}" class="d-block w-100" alt="hab4">
                 </div>
                 <div class="carousel-item">
-                    <img src="../static/img/sala4.jpg" class="d-block w-100" alt="hab4">
+                    <img th:src="@{/img/sala4.jpg}" class="d-block w-100" alt="hab4">
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -178,7 +176,7 @@
 
 
         <!--Javascript Bootstrap-->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+        <script th:src="@{https://code.jquery.com/jquery-3.5.1.slim.min.js}" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js}" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     </body>
 </html>
