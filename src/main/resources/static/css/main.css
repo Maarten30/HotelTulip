@@ -1,7 +1,15 @@
-/*Barra menu*/
+/*Menu*/
 .navbar{
     background-color: #ffffff !important;
     height: 100px;
+}
+
+.mr-auto{
+    padding-left: 60px;
+}
+
+.ml-auto{
+    padding-right: 60px;
 }
 
 .navbar-brand{
@@ -9,14 +17,124 @@
     font-size: x-large !important;
 }
 
-/*Para los parrafos*/
+.nav-item:hover a{
+    text-decoration: underline;
+}
+
+/*Index*/
+.container-sm{
+    padding-bottom: 60px;
+    padding-top: 60px;
+}
+.column {
+    float: left;
+    width: 33.33%;
+    padding: 5px;
+}
+
+.column:hover img{
+    transform: scale(1.1);
+}
+
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/*.column img{
+    width: 100%;
+}*/
+
+.hover {
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 60%;
+}
+
+.hover-overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 90;
+    transition: all 0.4s;
+}
+
+.hover img {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all 0.3s;
+}
+
+.hover-content {
+    position: relative;
+    z-index: 99;
+}
+
+.hover-1 img {
+    width: 105%;
+    position: absolute;
+    top: 0;
+    left: -5%;
+    transition: all 0.3s;
+}
+
+.hover-1-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 99;
+    transition: all 0.4s;
+}
+
+.hover-1 .hover-overlay {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.hover-1-description {
+    transform: translateY(0.5rem);
+    transition: all 0.4s;
+    opacity: 0;
+}
+
+.hover-1:hover .hover-1-content {
+    bottom: 2rem;
+}
+
+.hover-1:hover .hover-1-description {
+    opacity: 1;
+    transform: none;
+}
+
+.hover-1:hover img {
+    left: 0;
+}
+
+.hover-1:hover .hover-overlay {
+    opacity: 0;
+}
+
+.padding-0{
+    padding-right:0;
+    padding-left:0;
+}
+
+.row.col img{
+    filter: grayscale(100%);
+}
+
+/*Paragraphs*/
 p{
     margin:24px 0;
     line-height: 2;
     font-family: 'PT Serif', serif !important;
 }
 
-/*Para las cookies*/
+/*Cookies*/
 .cookie-container{
     font-size: 20px;
     font-family: 'PT Serif', serif;
@@ -57,8 +175,7 @@ p{
     font-family: 'PT Serif', serif;
 }
 
-/*Para inicio sesion y crear cuenta*/
-
+/*Log In and Create account*/
 .bg{
     background: url("../img/hotel.jpg") no-repeat;
     width: 100%;
@@ -76,7 +193,7 @@ p{
     box-shadow: 0px 0px 10px 0px #000;
 }
 
-/*Para la pantalla contacto*/
+/*Contact*/
 #contatti{
     background-color: #eee;
     letter-spacing: 2px;
@@ -86,7 +203,6 @@ p{
     text-decoration: none;
 }
 
-
 @media (max-width: 575.98px) {
 
     #contatti{padding-bottom: 800px;}
@@ -95,7 +211,6 @@ p{
         height: 450px;
     }
 }
-
 
 @media (min-width: 576px) {
 
@@ -129,3 +244,18 @@ p{
 h3{
     font-family: 'PT Serif', serif;
  }
+
+/*Reservation*/
+label{
+    display: block;
+    font: 1rem 'PT Serif', serif;
+}
+
+input, label{
+    margin: .4rem 0;
+}
+
+.form-check-inline{
+    font-family: 'PT Serif', serif;
+    text-align: center !important;
+}

@@ -23,41 +23,101 @@
 
     <body>
         <nav class="navbar navbar-expand-md navbar-light bg-light">
-                <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="navbar-brand" th:href="@{/reservations}">RESERVAR</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="navbar-brand" th:href="@{/tarifas}">TARIFAS</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="mx-auto order-0">
-                    <a class="navbar-brand mx-auto font-weight-bold" th:href="@{/}">HOTEL TULIP</a>
-                    <small class="form-text text-muted text-center">Human Compilers</small>
-                </div>
-                <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="navbar-brand" th:href="@{/contact}">CONTACTO</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="navbar-brand" th:href="@{/login}">INICIAR SESIÓN</a>
-                        </li>
-                    </ul>
-                </div>
+            <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="navbar-brand" th:href="@{/reservations}">RESERVAR</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="navbar-brand" th:href="@{/tarifas}">TARIFAS</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="mx-auto order-0">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="navbar-brand mx-auto font-weight-bold" th:href="@{/}">HOTEL TULIP</a>
+                        <small class="form-text text-muted text-center">Human Compilers</small>
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="navbar-brand" th:href="@{/contact}">CONTACTO</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="navbar-brand" th:href="@{/login}">INICIAR SESIÓN</a>
+                    </li>
+                </ul>
             </div>
         </nav>
         <hr>
 
-<!--        <img src="../static/img/hotel.jpg" class="img-fluid" alt="hotel tulip">-->
+        <!--<img src="../static/img/hotel.jpg" class="img-fluid" alt="hotel tulip">-->
         <img th:src="@{/img/hotel.jpg}" class="img-fluid" alt="hotel tulip">
+
+        <div class="container-sm fluid">
+            <h1 class="text-center display-5">Elevamos la experiencia de HOTEL TULIP</h1>
+            <h5 class="text-center display-5 text-muted">Ampliamos la experiencia HOTEL TULIP, convirtiendo tus días inolvidables</h5>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4 padding-0">
+                <div class="hover hover-1 text-white rounded"><img th:src="@{/img/comida.jpg}">
+                    <div class="hover-overlay"></div>
+                    <div class="hover-1-content px-5 py-4">
+                        <h3 class="hover-1-title text-uppercase font-weight-bold mb-0"> <span class="font-weight-light">Comida </span>Variada</h3>
+                        <p class="hover-1-description font-weight-light mb-0">Comida variada para todo tipo de comensales.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4 padding-0">
+                <div class="hover hover-1 text-white rounded"><img th:src="@{/img/anochecer.jpg}">
+                    <div class="hover-overlay"></div>
+                    <div class="hover-1-content px-5 py-4">
+                        <h3 class="hover-1-title text-uppercase font-weight-bold mb-0"> <span class="font-weight-light">Anocheceres </span>ÚnicOs</h3>
+                        <p class="hover-1-description font-weight-light mb-0">Vivirás anocheceres especiales e inolvidables.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4 padding-0">
+                <div class="hover hover-1 text-white rounded"><img th:src="@{/img/piscina.jpg}">
+                    <div class="hover-overlay"></div>
+                    <div class="hover-1-content px-5 py-4">
+                        <h3 class="hover-1-title text-uppercase font-weight-bold mb-0"> <span class="font-weight-light">Ejercicio </span>24/7</h3>
+                        <p class="hover-1-description font-weight-light mb-0">Tendrás acceso a la piscina a todas horas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-sm fluid">
+            <h1 class="text-center display-5">El resultado de varias mentes jóvenes e innovadoras</h1>
+            <h5 class="text-center display-5 text-muted">En 2019, en Duque de Baena, Donostia, nace HOTEL TULIP. Este hotel, creado por el grupo Human Compilers, ofrece a cualquier persona una experiencia única para disfrutar de esta preciosa ciudad, su cultura y su gastronomía</h5>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <img th:src="@{/img/Maarten.jpg}" class="rounded-pill img-fluid">
+            </div>
+            <div class="col">
+                <img th:src="@{/img/Ibo.jpg}" class="rounded-pill img-fluid">
+            </div>
+            <div class="col">
+                <img th:src="@{/img/Lau.jpg}" class="rounded-pill img-fluid">
+            </div>
+            <div class="col">
+                <img th:src="@{/img/Gabri.jpg}" class="rounded-pill img-fluid">
+            </div>
+        </div>
 
         <div class="cookie-container">
             <p>
                 Este sitio web utiliza cookies, si permanece aquí acepta su uso. Puede leer más sobre el uso de las cookies en:
-                <a href="cookies.html"> Más información.</a>
+                <a href="Cookies.html"> Más información.</a>
             </p>
 
             <button class="cookie-btn">Okay</button>

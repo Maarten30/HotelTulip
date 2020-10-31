@@ -11,7 +11,7 @@ public class TemplateController {
     @GetMapping("/")
     public ModelAndView index() {
 
-        ModelAndView modelAndView = new ModelAndView("index");
+        ModelAndView modelAndView = new ModelAndView("Index");
 
         modelAndView.addObject("name", "Laura");
         //model.addAttribute("name", "Laura");
@@ -22,7 +22,7 @@ public class TemplateController {
     @GetMapping("/login")
     public ModelAndView login() {
 
-        ModelAndView modelAndView = new ModelAndView("inicioSesion");
+        ModelAndView modelAndView = new ModelAndView("LogIn");
 
         return modelAndView;
     }
@@ -30,7 +30,7 @@ public class TemplateController {
     @GetMapping("/tarifas")
     public ModelAndView tarifas() {
 
-        ModelAndView modelAndView = new ModelAndView("tarifas");
+        ModelAndView modelAndView = new ModelAndView("Price");
 
         return modelAndView;
     }
@@ -38,7 +38,7 @@ public class TemplateController {
     @GetMapping("/contact")
     public ModelAndView contact() {
 
-        ModelAndView modelAndView = new ModelAndView("contacto");
+        ModelAndView modelAndView = new ModelAndView("Contact");
 
         return modelAndView;
     }
@@ -46,7 +46,7 @@ public class TemplateController {
     @GetMapping("/reservations")
     public ModelAndView reservations() {
 
-        ModelAndView modelAndView = new ModelAndView("reservas");
+        ModelAndView modelAndView = new ModelAndView("Reservation");
 
         return modelAndView;
     }

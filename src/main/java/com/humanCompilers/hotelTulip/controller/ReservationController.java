@@ -5,7 +5,6 @@ import com.humanCompilers.hotelTulip.model.Reservation;
 import com.humanCompilers.hotelTulip.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,7 +24,7 @@ public class ReservationController {
 
         reservationService.addReservation(reservation);
 
-        ModelAndView modelAndView = new ModelAndView("index");
+        ModelAndView modelAndView = new ModelAndView("Index");
         modelAndView.addObject("name", "Laura");
 
         return modelAndView;
