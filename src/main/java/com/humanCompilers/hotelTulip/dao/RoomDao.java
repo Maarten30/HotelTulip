@@ -17,7 +17,7 @@ public interface RoomDao {
 
     List<Room> selectAllRooms();
 
-    Optional<Room> selectRoomById(UUID id);
+    Room selectRoomById(UUID id);
 
     int deleteRoomById(UUID id);
 

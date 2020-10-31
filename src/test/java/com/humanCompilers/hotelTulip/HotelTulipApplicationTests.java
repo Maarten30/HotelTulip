@@ -4,8 +4,10 @@ import com.humanCompilers.hotelTulip.model.Reservation;
 import com.humanCompilers.hotelTulip.model.Room;
 import com.humanCompilers.hotelTulip.model.RoomType;
 import com.humanCompilers.hotelTulip.model.Tarifa;
+import com.humanCompilers.hotelTulip.service.ReservationService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
@@ -26,10 +28,17 @@ class HotelTulipApplicationTests {
 	LocalDate date_2 = LocalDate.of(2020, 7, 28);
 	LocalDate date_3 = LocalDate.of(2020, 8, 3);
 
+	@Autowired
+	private final ReservationService reservationService;
+
+	public HotelTulipApplicationTests(ReservationService reservationService) {
+		this.reservationService = reservationService;
+	}
+
 	@Test
 	public void calculateTotalPriceTest() {
-		assertEquals(180.00, reserva.calculateTotalPrice(date_0, date_1, room), 0.0);
-		assertEquals(320.00, reserva.calculateTotalPrice(date_2, date_3, room), 0.0);
+		assertEquals(180.00, reservationService.calculateTotalPrice(date_0, date_1, room), 0.0);
+		assertEquals(320.00, reservationService.calculateTotalPrice(date_2, date_3, room), 0.0);
 	}
 
 

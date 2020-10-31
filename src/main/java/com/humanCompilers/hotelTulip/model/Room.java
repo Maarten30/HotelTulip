@@ -18,4 +18,12 @@ public class Room {
         this.id = id;
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "id=" + id +
+                ", type=" + type +
+                '}';
+    }
 }

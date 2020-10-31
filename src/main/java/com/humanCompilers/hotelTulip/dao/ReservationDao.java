@@ -17,7 +17,7 @@ public interface ReservationDao {
 
     List<Reservation> selectAllReservations();
 
-    Optional<Reservation> selectReservationById(UUID id);
+    Reservation selectReservationById(UUID id);
 
     int deleteReservationById(UUID id);
 

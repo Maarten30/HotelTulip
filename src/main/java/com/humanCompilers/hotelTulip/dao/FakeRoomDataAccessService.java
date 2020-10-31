@@ -1,6 +1,7 @@
 package com.humanCompilers.hotelTulip.dao;
 
 import com.humanCompilers.hotelTulip.model.Room;
+import com.humanCompilers.hotelTulip.model.RoomType;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -12,6 +13,23 @@ import java.util.UUID;
 public class FakeRoomDataAccessService implements RoomDao {
 
     private static List<Room> DB = new ArrayList<>();
+
+    public FakeRoomDataAccessService() {
+        Room room1 = new Room(UUID.randomUUID(), RoomType.SINGLE);
+        Room room2 = new Room(UUID.randomUUID(), RoomType.DOUBLE);
+        Room room3 = new Room(UUID.randomUUID(), RoomType.TRIPLE);
+        Room room4 = new Room(UUID.randomUUID(), RoomType.SINGLE);
+        Room room5 = new Room(UUID.randomUUID(), RoomType.DOUBLE);
+        Room room6 = new Room(UUID.randomUUID(), RoomType.TRIPLE);
+
+        DB.add(room1);
+        DB.add(room2);
+        DB.add(room3);
+        DB.add(room4);
+        DB.add(room5);
+        DB.add(room6);
+
+    }
 
     @Override
     public int insertRoom(UUID id, Room room) {
@@ -25,34 +43,36 @@ public class FakeRoomDataAccessService implements RoomDao {
     }
 
     @Override
-    public Optional<Room> selectRoomById(UUID id) {
+    public Room selectRoomById(UUID id) {
         return DB.stream()
                 .filter(room -> room.getId().equals(id))
-                .findFirst();
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
     public int deleteRoomById(UUID id) {
-        Optional<Room> roomMaybe = selectRoomById(id);
+        Room roomMaybe = selectRoomById(id);
 
-        if (!(roomMaybe.isPresent())){
+        if (roomMaybe == null) {
             return 0;
+        } else {
+            DB.remove(roomMaybe);
         }
-        DB.remove(roomMaybe.get());
+
         return 1;
     }
 
     @Override
     public int updateRoomById(UUID id, Room updateRoom) {
-        return selectRoomById(id)
-                .map(room -> {
-                    int indexOfRoomToUpdate = DB.indexOf(room);
-                    if(indexOfRoomToUpdate >= 0) {
-                        DB.set(indexOfRoomToUpdate, new Room(id, updateRoom.getType()));
-                        return 1;
-                    }
-                    return 0;
-                })
-                .orElse(0);
+
+        Room aux = selectRoomById(id);
+        int indexOfRoomToUpdate = DB.indexOf(aux);
+        if (indexOfRoomToUpdate >= 0) {
+            DB.set(indexOfRoomToUpdate, new Room(id, updateRoom.getType()));
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }

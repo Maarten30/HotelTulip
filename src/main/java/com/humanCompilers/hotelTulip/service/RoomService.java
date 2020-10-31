@@ -24,11 +24,15 @@ public class RoomService {
         return roomDao.insertRoom(room);
     }
 
+    public int addRoom(UUID id, Room room) {
+        return roomDao.insertRoom(id, room);
+    }
+
     public List<Room> getAllRooms() {
         return roomDao.selectAllRooms();
     }
 
-    public Optional<Room> getRoomById(UUID id) {
+    public Room getRoomById(UUID id) {
         return roomDao.selectRoomById(id);
     }
 

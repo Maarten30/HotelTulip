@@ -119,21 +119,21 @@
             <tbody>
             <tr>
                 <th scope="row">Individual</th>
-                <td>100€</td>
-                <td>90€</td>
-                <td>80€</td>
+                <td th:text="${high_single.getPrice()} +'€'"></td>
+                <td th:text="${mid_single.getPrice()} +'€'"></td>
+                <td th:text="${low_single.getPrice()} +'€'"></td>
             </tr>
             <tr>
                 <th scope="row">Doble</th>
-                <td>120€</td>
-                <td>110€</td>
-                <td>95€</td>
+                <td th:text="${high_double.getPrice()} +'€'"></td>
+                <td th:text="${mid_double.getPrice()} +'€'"></td>
+                <td th:text="${low_double.getPrice()} +'€'"></td>
             </tr>
             <tr>
                 <th scope="row">Suite</th>
-                <td>180€</td>
-                <td>155€</td>
-                <td>130€</td>
+                <td th:text="${high_triple.getPrice()} +'€'"></td>
+                <td th:text="${mid_triple.getPrice()} +'€'"></td>
+                <td th:text="${low_triple.getPrice()} +'€'"></td>
             </tr>
             </tbody>
         </table><br><hr>
