@@ -15,46 +15,16 @@
         <link th:href="@{/css/main.css}" rel="stylesheet"/>
         <!--Window image-->
 <!--        <link rel="shortcut icon" href="../static/img/tulip.jpg" />-->
-        <link th:href="@{/img/tulip.jpg}" rel="shortcut icon">
+        <link th:href="@{/img/tulip.png}" rel="shortcut icon">
         <!--Font-family-->
         <link th:href="@{https://fonts.googleapis.com/css2?family=PT+Serif&display=swap}" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/99af27179e.js" crossorigin="anonymous"></script>
 
     </head>
 
     <body>
-        <nav class="navbar navbar-expand-md navbar-light bg-light">
-            <div class="navbar-collapse collapse order-1 order-md-0 dual-collapse2"> <!-- w-100 -->
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="navbar-brand" th:href="@{/reservations}">RESERVAR</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="navbar-brand" th:href="@{/tarifas}">TARIFAS</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="mx-auto order-0">
-                <ul class="navbar-nav"> <!-- mr-auto -->
-                    <li class="nav-item active">
-                        <a class="navbar-brand mx-auto font-weight-bold" th:href="@{/}">HOTEL TULIP</a>
-                        <small class="form-text text-muted text-center">Human Compilers</small>
-                    </li>
-                </ul>
-            </div>
-            <div class="navbar-collapse collapse order-3 dual-collapse2"> <!-- w-100 -->
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="navbar-brand" th:href="@{/contact}">CONTACTO</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="navbar-brand" th:href="@{/login}">INICIAR SESIÓN</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <hr>
+    <div th:insert="fragments/header :: header"></div>
 
-        <!--<img src="../static/img/hotel.jpg" class="img-fluid" alt="hotel tulip">-->
         <img th:src="@{/img/hotel.jpg}" class="img-fluid" alt="hotel tulip">
 
         <div class="container-sm fluid">
@@ -96,21 +66,21 @@
 
         <div class="container-sm fluid">
             <h1 class="text-center display-5">El resultado de varias mentes jóvenes e innovadoras</h1>
-            <h5 class="text-center display-5 text-muted">En 2019, en Duque de Baena, Donostia, nace HOTEL TULIP. Este hotel, creado por el grupo Human Compilers, ofrece a cualquier persona una experiencia única para disfrutar de esta preciosa ciudad, su cultura y su gastronomía</h5>
+            <h5 class="text-center display-5 text-muted">En 2019, en Duque de Baena, Donostia, nace HOTEL TULIP. Este hotel, creado por el grupo Java Divas, ofrece a cualquier persona una experiencia única para disfrutar de esta preciosa ciudad, su cultura y su gastronomía</h5>
         </div>
 
         <div class="row">
             <div class="col">
-                <img th:src="@{/img/Maarten.jpg}" class="rounded-pill img-fluid">
+                <img th:src="@{/img/eider.jpg}" class="rounded-pill img-fluid">
             </div>
             <div class="col">
-                <img th:src="@{/img/Ibo.jpg}" class="rounded-pill img-fluid">
+                <img th:src="@{/img/maider.jpg}" class="rounded-pill img-fluid">
             </div>
             <div class="col">
-                <img th:src="@{/img/Lau.jpg}" class="rounded-pill img-fluid">
+                <img th:src="@{/img/nerea.jpg}" class="rounded-pill img-fluid">
             </div>
             <div class="col">
-                <img th:src="@{/img/Gabri.jpg}" class="rounded-pill img-fluid">
+                <img th:src="@{/img/maria.jpg}" class="rounded-pill img-fluid">
             </div>
         </div>
 
@@ -123,7 +93,10 @@
             <button class="cookie-btn">Okay</button>
         </div>
 
+        <div th:insert="fragments/footer :: footer"></div>
+
         <!--Javascript-->
+        <script th:src="@{js/jquery-3.4.1.min.js}"></script>
         <script th:src="@{js/index.js}"></script>
 <!--        <script src="../static/js/index.js"></script>-->
 

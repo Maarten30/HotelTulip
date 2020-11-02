@@ -14,7 +14,7 @@
         <link rel="stylesheet" th:href="@{/css/main.css}">
         <!--<link th:href="@{/css/main.css}" rel="stylesheet"/>-->
         <!--Window image-->
-        <link rel="shortcut icon" th:href="@{/img/tulip.jpg}" />
+        <link rel="shortcut icon" th:href="@{/img/tulip.png}" />
         <!--<link th:href="@{/img/tulip.jpg}" rel="shortcut icon">-->
         <!--Font-family-->
         <link th:href="@{https://fonts.googleapis.com/css2?family=PT+Serif&display=swap}" rel="stylesheet">
@@ -26,34 +26,7 @@
 
     </head>
     <body>
-        <nav class="navbar navbar-expand-md navbar-light bg-light">
-            <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="navbar-brand" th:href="@{/reservations}">RESERVAR</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="navbar-brand" th:href="@{/tarifas}">TARIFAS</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="mx-auto order-0">
-                <a class="navbar-brand mx-auto font-weight-bold" th:href="@{/}">HOTEL TULIP</a>
-                <small class="form-text text-muted text-center">Human Compilers</small>
-            </div>
-            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="navbar-brand" th:href="@{/contact}">CONTACTO</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="navbar-brand" th:href="@{/login}">INICIAR SESIÓN</a>
-                    </li>
-                </ul>
-            </div>
-            </div>
-        </nav>
-        <hr>
+        <div th:insert="fragments/header :: header"></div>
 
         <div class="row" id="contatti">
             <div class="container mt-5" >
@@ -109,7 +82,7 @@
                             <h2 class="text-uppercase mt-4 font-weight-bold">Hotel Tulip</h2>
 
                             <i class="fas fa-phone mt-3"></i> <a th:href="@{tel:+}">(+34) 943 548789</a><br>
-                            <i class="fa fa-envelope mt-3"></i> <a href="">info@hoteltulip.eus</a><br>
+                            <i class="fa fa-envelope mt-3"></i> <a href="">hoteltulip@gmail.com</a><br>
                             <i class="fas fa-globe mt-3"></i> Baenako Dukea Pasealekua,3<br>
                             <i class="fas fa-globe mt-3"></i> 20009, Donostia-San Sebastián, Gipuzkoa<br>
                         </div>
@@ -117,6 +90,8 @@
                 </div>
             </div>
         </div>
+
+        <div th:insert="fragments/footer :: footer"></div>
 
         <!--Javascript Bootstrap-->
         <script th:src="@{https://code.jquery.com/jquery-3.5.1.slim.min.js}" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
