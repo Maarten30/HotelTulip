@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>footer</title>
+    <meta charset="UTF-8">
+    <title>header</title>
+    <!--Meta tags-->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--CSS-->
+    <!--        <link rel="stylesheet" href="../static/css/main.css">-->
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+    <!--Window image-->
+    <!--        <link rel="shortcut icon" href="../static/img/tulip.jpg" />-->
+    <link th:href="@{/img/tulip.jpg}" rel="shortcut icon">
+    <!--Font-family-->
+    <link th:href="@{https://fonts.googleapis.com/css2?family=PT+Serif&display=swap}" rel="stylesheet">
+</head>
+<body>
+    <footer th:fragment="header" class="container-fluid footerStyles">
+        <!-- Fila 1 -->
+        <div class="row text-center d-flex justify-content-center">
+            <a class="footerMenuColor" th:href="@{/reservations}">Reservar</a>
+            <span class="footerMenu">|</span>
+            <a class="footerMenuColor" th:href="@{/tarifas}">Tarifas</a>
+            <span class="footerMenu">|</span>
+            <a class="footerMenuColor" th:href="@{/contact}">Contacto</a>
+            <span class="footerMenu">|</span>
+            <a class="footerMenuColor" th:href="@{/login}">Iniciar Sesión</a>
+        </div>
+        <!-- Fila 2 -->
+        <div class="row text-center d-flex justify-content-center" style="margin-top: 20px;">
+            <div class="col-sm-12">
+                <h2 style="font-family: 'PT Serif', cursive;">Hotel Tulip</h2>
+                <h5 style="font-family: 'PT Serif', cursive;">Donostia / San Sebastián</h5>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
