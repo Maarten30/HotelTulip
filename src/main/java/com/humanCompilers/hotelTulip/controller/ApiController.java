@@ -50,11 +50,12 @@ public class ApiController {
      * En realidad este metodo no va a existir aqui porque desde la pagina web no se pueden ver todos los usuarios.
      * Solo esta para probar con postman que añade bien.S
      */
-    @GetMapping("/users")
-    public List<User> getUsers() { return userService.getUsers(); }
+   // @GetMapping("/users")
+    // public List<User> getUsers() { return userService.getUsers(); }
 
-    @PostMapping("/registro")
-    public int insertUser(@RequestParam(value = "username", required = true) String username,
+  /*
+  @PostMapping("/register")
+   public int insertUser(@RequestParam(value = "username", required = true) String username,
                            @RequestParam(value = "email", required = true) String email,
                            @RequestParam(value = "password", required = true) String password)
     {
@@ -62,4 +63,6 @@ public class ApiController {
         userService.addUser(newUser);
         return 1;
     }
+   */
+
 }

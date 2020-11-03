@@ -45,10 +45,17 @@
 			<optional>true</optional>
 		</dependency>
 
-		<!-- Dependencia para no tener que recargar el servidor mientras se desarrolloa -->
+		<!-- Dependencia para no tener que recargar el servidor mientras se desarrollos -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
+		</dependency>
+
+		<!-- Para gestionar usuarios -->
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
 		<!-- Junit -->
