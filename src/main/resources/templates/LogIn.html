@@ -36,7 +36,8 @@
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">Entrar</button>
                         <button type="button" class="btn btn-link">¿Ha olvidado su contraseña?</button>
-                        <button type="button" class="btn btn-light btn-block" onclick="location='crearCuenta.html'" >Crear cuenta</button>
+                        <button type="button" class="btn btn-light btn-block" th:onclick="'window.location.href = \'' + @{/create-account} + '\''" >Crear cuenta</button>
+
                     </form>
                 </section>
             </section>

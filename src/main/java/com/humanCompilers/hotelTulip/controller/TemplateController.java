@@ -53,6 +53,14 @@ public class TemplateController {
         return modelAndView;
     }
 
+    @GetMapping("/create-account")
+    public ModelAndView createAccount() {
+
+        ModelAndView modelAndView = new ModelAndView("createAccount");
+
+        return modelAndView;
+    }
+
     @GetMapping("/tarifas")
     public ModelAndView tarifas() {
 
@@ -91,6 +99,22 @@ public class TemplateController {
         // Room cuarto_prueba = new Room(UUID.randomUUID(), RoomType.SINGLE);
         // roomService.addRoom(cuarto_prueba.getId(), cuarto_prueba);
         // modelAndView.addObject("room", cuarto_prueba);
+
+        return modelAndView;
+    }
+
+    @GetMapping("/politica-privacidad")
+    public ModelAndView cookies() {
+
+        ModelAndView modelAndView = new ModelAndView("Cookies");
+
+        return modelAndView;
+    }
+
+    @GetMapping("/confirmation")
+    public ModelAndView confirmation() {
+
+        ModelAndView modelAndView = new ModelAndView("reservationResult");
 
         return modelAndView;
     }
