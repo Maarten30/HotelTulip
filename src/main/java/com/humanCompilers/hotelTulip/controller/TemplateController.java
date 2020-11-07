@@ -170,7 +170,8 @@ public class TemplateController {
             modelAndView.setViewName("reservationResult");
             modelAndView.addObject("reservation", reservation);
         } else {
-            modelAndView.setViewName("reservationError");
+            System.out.println("No disponible");
+            modelAndView.setViewName("Reservation");
             modelAndView.addObject("message", "Sorry! No room for the desired people was available");
         }
 

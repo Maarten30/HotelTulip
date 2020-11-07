@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> 404 Not Found</title>
+
+    <!--Meta tags-->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--CSS-->
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <!--<link th:href="@{/css/main.css}" rel="stylesheet"/>-->
+    <!--Window image-->
+    <link rel="shortcut icon" th:href="@{/img/tulip.png}" />
+    <!--<link th:href="@{/img/tulip.jpg}" rel="shortcut icon">-->
+    <!--Font-family-->
+    <link th:href="@{https://fonts.googleapis.com/css2?family=PT+Serif&display=swap}" rel="stylesheet">
+    <link th:href="@{https://fonts.googleapis.com/css?family=Maven+Pro=400:900}" rel="stylesheet">
+    <!--Links and scripts for contact form-->
+    <link th:href="@{//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-css">
+    <script th:src="@{//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js}"></script>
+    <script th:src="@{//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js}"></script>
+    <script src="https://kit.fontawesome.com/99af27179e.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="notfound">
+        <div class="notfound">
+            <div class="notfound-404">
+                <h1> 404 </h1>
+            </div>
+            <h2> ¡Lo sentimos, página no encontrada!</h2>
+            <p>
+                ¿Quizá esta página ha cambiado de ubicación? ¿Se ha eliminado?
+                ¿Está de cuarentena? ¿Nunca existió?
+            </p>
+            <p>¡Volvamos a la <a href="/"> Página Principal </a> e intentémoslo de nuevo desde ahí! </p>
+        </div>
+    </div>
+
+</body>
+</html>

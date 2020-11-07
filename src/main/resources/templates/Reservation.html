@@ -30,6 +30,12 @@
         </div>
         <hr>
 
+        <th:block th:if="${message}">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                No hay disponibilidad para las fechas solicitadas.  <a th:href="@{/reservations}" class="alert-link">Reintentar</a>
+            </div>
+        </th:block>
+
         <div id="booking" class="section">
             <div class="section-center">
                 <div class="container">
@@ -76,7 +82,7 @@
                                     </div>
                                 </div>
                                 <div class="form-btn">
-                                    <button class="submit-btn">Reservar ahora </button>
+                                    <button class="submit-btn" data-toggle="modal" data-target="#staticBackdrop">Reservar ahora </button>
                                 </div>
                             </form>
                         </div>

@@ -32,8 +32,16 @@
         <div class="row">
             <div class="col-sm-6">
                 <h4>Resumen reserva:</h4>
-                <p th:text="'price: ' + ${reservation.getTotalPrice()}" />
-                <a href="/reservations">Submit another Reservation</a>
+                <div class="square">
+                    <div class="content">
+                        <ul th:text="'Id_reserva: ' + ${reservation.getId()}"> </ul>
+                        <ul th:text="'Fecha entrada: ' + ${reservation.getCheckinDate()}"> </ul>
+                        <ul th:text="'Fecha salida: ' + ${reservation.getCheckoutDate()}"> </ul>
+                        <ul th:text="'Habitación/Sala reservada: ' + ${reservation.getReservedRoom().getType()}"> </ul>
+                        <ul th:text="'Precio Total (IVA incluido): ' + ${reservation.getTotalPrice()} + '€'"> </ul>
+                        <a href="/reservations">Submit another Reservation</a>
+                    </div>
+                </div>
             </div>
             <div class="col-sm-6">
                 <h4>Le esperamos en la siguiente dirección</h4>
