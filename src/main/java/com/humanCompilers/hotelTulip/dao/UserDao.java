@@ -10,5 +10,6 @@ public interface UserDao {
 
     // Metodos para simular la BD, insertar y sacar usuarios.
     Optional<User> selectApplicationUserByUsername(String email);
+    public void addUser (User newUser);
 
 }

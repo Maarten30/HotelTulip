@@ -27,4 +27,9 @@ public class UserService implements UserDetailsService {
         return userDao.selectApplicationUserByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException(String.format("Username %s not found", username)));
     }
+
+    public void createUser (User newUser)
+    {
+        userDao.addUser(newUser);
+    }
 }

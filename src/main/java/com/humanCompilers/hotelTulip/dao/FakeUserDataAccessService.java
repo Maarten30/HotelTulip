@@ -14,6 +14,7 @@ import java.util.Optional;
 public class FakeUserDataAccessService implements UserDao {
 
     private final PasswordEncoder passwordEncoder;
+    List<User> applicationUsers;
     /**
      * User u1 = new User("iboneurquiola", "iboneurquiola@gmail.com", "12345");
      *         User u2 = new User("laurallorente", "laurallorente@gmail.com", "6789");
@@ -35,7 +36,19 @@ public class FakeUserDataAccessService implements UserDao {
 
     @Autowired
     public FakeUserDataAccessService(PasswordEncoder passwordEncoder) {
+
         this.passwordEncoder = passwordEncoder;
+
+        applicationUsers  = new ArrayList<>();
+        applicationUsers.add(new User(
+                "tom@gmail.com",
+                passwordEncoder.encode("password"),
+                null,
+                true,
+                true,
+                true,
+                true
+        ));
     }
 
     @Override
@@ -46,19 +59,17 @@ public class FakeUserDataAccessService implements UserDao {
                 .findFirst();
     }
 
+    @Override
+    public void addUser(User newUser) {
+        // Antes de guardar codificar la contraseña
+        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+        applicationUsers.add(newUser);
+
+    }
+
     private List<User> getApplicationUsers() {
-        List<User> applicationUsers = new ArrayList<>();
-
-        applicationUsers.add(new User(
-                "tom@gmail.com",
-                passwordEncoder.encode("password"),
-                null,
-                true,
-                true,
-                true,
-                true
-        ));
-
         return applicationUsers;
     }
+
+
 }

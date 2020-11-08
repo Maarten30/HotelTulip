@@ -3,11 +3,13 @@ package com.humanCompilers.hotelTulip.controller;
 
 import com.humanCompilers.hotelTulip.model.Reservation;
 import com.humanCompilers.hotelTulip.model.Room;
+import com.humanCompilers.hotelTulip.model.User;
 import com.humanCompilers.hotelTulip.model.RoomType;
 import com.humanCompilers.hotelTulip.model.Tarifa;
 import com.humanCompilers.hotelTulip.service.ReservationService;
 import com.humanCompilers.hotelTulip.service.RoomService;
 import com.humanCompilers.hotelTulip.service.TarifaService;
+import com.humanCompilers.hotelTulip.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -25,13 +27,15 @@ public class TemplateController {
     private final ReservationService reservationService;
     private final RoomService roomService;
     private final TarifaService tarifaService;
+    private final UserService userService;
 
     @Autowired
     public TemplateController(ReservationService reservationService, RoomService roomService,
-                              TarifaService tarifaService) {
+                              TarifaService tarifaService, UserService userService) {
         this.reservationService = reservationService;
         this.roomService = roomService;
         this.tarifaService = tarifaService;
+        this.userService = userService;
     }
 
     @GetMapping("/")
@@ -178,5 +182,28 @@ public class TemplateController {
         return modelAndView;
     }
 
+    @GetMapping("/registration")
+    public ModelAndView showRegistrationForm() {
+        ModelAndView modelAndView = new ModelAndView("Registration");
+        User newUser = new User();
+        modelAndView.addObject("newUser", newUser); // key, value
+        return modelAndView;
+    }
 
+    @PostMapping("/registration")
+    public ModelAndView createUser(@ModelAttribute User newUser) {
+
+        newUser.setAccountNonExpired(true);
+        newUser.setAccountNonLocked(true);
+        newUser.setCredentialsNonExpired(true);
+        newUser.setEnabled(true);
+        System.out.println(newUser);
+
+        userService.createUser(newUser);
+
+        ModelAndView modelAndView = new ModelAndView("index");
+        //ApplicationUser newUser = new ApplicationUser();
+        //modelAndView.addObject("newUser", newUser); // key, value
+        return modelAndView;
+    }
 }

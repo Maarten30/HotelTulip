@@ -1,22 +1,33 @@
 package com.humanCompilers.hotelTulip.model;
 
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 
+@NoArgsConstructor
+@Setter
 public class User implements UserDetails {
 
-    private final String email;
-    private final String password;
-    private final Collection<? extends GrantedAuthority> grantedAuthorities;
-    private final boolean isAccountNonExpired;
-    private final boolean isAccountNonLocked;
-    private final boolean isCredentialsNonExpired;
-    private final boolean isEnabled;
+    @NotEmpty
+    @NotNull
+    private String username;
+
+    @NotEmpty
+    @NotNull
+    private String password;
+    private Collection<? extends GrantedAuthority> grantedAuthorities;
+    private boolean isAccountNonExpired;
+    private boolean isAccountNonLocked;
+    private boolean isCredentialsNonExpired;
+    private boolean isEnabled;
 
 
-    public User (String email,
+    public User (String username,
                            String password,
                            Collection<? extends GrantedAuthority> grantedAuthorities,
                            boolean isAccountNonExpired,
@@ -25,7 +36,7 @@ public class User implements UserDetails {
                            boolean isEnabled) {
         this.grantedAuthorities = grantedAuthorities;
         this.password = password;
-        this.email = email;
+        this.username = username;
         this.isAccountNonExpired = isAccountNonExpired;
         this.isAccountNonLocked = isAccountNonLocked;
         this.isCredentialsNonExpired = isCredentialsNonExpired;
@@ -39,7 +50,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return username;
     }
 
     @Override
@@ -65,5 +76,18 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return isEnabled;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", grantedAuthorities=" + grantedAuthorities +
+                ", isAccountNonExpired=" + isAccountNonExpired +
+                ", isAccountNonLocked=" + isAccountNonLocked +
+                ", isCredentialsNonExpired=" + isCredentialsNonExpired +
+                ", isEnabled=" + isEnabled +
+                '}';
     }
 }
