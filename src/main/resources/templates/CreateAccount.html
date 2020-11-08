@@ -44,7 +44,7 @@
                         <div class="form-group">
                             <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Repetir contraseña">
                         </div>
-                        <button type="button" class="btn btn-primary btn-block" onclick="location='reservas.html'">Crear cuenta</button>
+                        <button type="button" class="btn btn-primary btn-block" th:onclick="'window.location.href = \'' + @{/userBookings} + '\''">Crear cuenta</button>
                     </form>
                 </section>
             </section>

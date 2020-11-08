@@ -9,8 +9,10 @@ import com.humanCompilers.hotelTulip.model.Tarifa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.util.SerializationUtils;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -74,10 +76,19 @@ public class ReservationService {
     public Room CheckAvailability(LocalDate checkin, LocalDate checkOut, RoomType roomType) {
 
         List<Room> rooms = roomService.getAllRooms();
+        System.out.println(rooms);
         List<Reservation> reservations = getAllReservations();
+        System.out.println(reservations);
         Room freeRoom = null;
 
-        rooms.removeIf(r -> r.getType() != roomType);
+        List<Room> rooms_cloned = new ArrayList<>();
+        rooms.forEach(room -> {
+            Room aux_room = new Room();
+            aux_room.setId(room.getId());
+            aux_room.setType(room.getType());
+        });
+
+        rooms_cloned.removeIf(r -> r.getType() != roomType);
 
         System.out.println("El listado de rooms despues de filtrado es: ");
         System.out.println(rooms);

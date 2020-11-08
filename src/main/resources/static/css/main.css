@@ -1,21 +1,4 @@
 /*Menu*/
-/*.navbar{
-    background-color: #ffffff !important;
-    height: 100px;
-}*/
-
-/*.mr-auto{
-    padding-left: 60px;
-}
-
-.ml-auto{
-    padding-right: 60px;
-}*/
-
-/*.navbar-brand{
-    font-family: 'PT Serif', serif;
-    font-size: x-large !important;
-}*/
 
 .nav-item:hover a{
     text-decoration: underline;
@@ -85,6 +68,9 @@
     padding-top: 30px;
     background-color: #222222;
     color: #A8ACB3;
+    left: 0;
+    bottom: 0;
+    width: 100%;
 }
 
 .colorIcon {
@@ -629,4 +615,9 @@ h3{
     .notfound h2{
         font-size:26px
     }
+}
+
+/*User Bookings*/
+.infoRes{
+    margin-right: 20px;
 }

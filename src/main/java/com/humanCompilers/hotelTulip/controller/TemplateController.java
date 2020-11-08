@@ -123,6 +123,32 @@ public class TemplateController {
         return modelAndView;
     }
 
+    @GetMapping("/userBookings")
+    public ModelAndView userBookings() {
+
+        ModelAndView modelAndView = new ModelAndView("userReservations");
+
+        List<Reservation> reservas = reservationService.getAllReservations();
+
+        modelAndView.addObject("Reservas", reservas);
+
+        return modelAndView;
+    }
+
+    //*@DeleteMapping("/userBookings")
+    //    public ModelAndView deleteBookings(@RequestParam(value="Id", required = true) UUID id){
+    //
+    //        System.out.println("El Id recibido es:");
+    //        System.out.println(id);
+    //
+    //        ModelAndView modelAndView = new ModelAndView();
+    //
+    //        modelAndView.setViewName("userReservations");
+    //        modelAndView.
+    //
+    //        return modelAndView;
+    //    }
+
     @PostMapping("/reservations")
     public ModelAndView createReservation(@RequestParam(value = "checkinDate", required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkin,
                                           @RequestParam(value = "checkoutDate", required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkout,
@@ -171,6 +197,7 @@ public class TemplateController {
         ModelAndView modelAndView = new ModelAndView();
 
         if(available_room != null) {
+            System.out.println("Available room = null");
             modelAndView.setViewName("reservationResult");
             modelAndView.addObject("reservation", reservation);
         } else {

@@ -34,7 +34,7 @@
                         <div class="form-group">
                             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña" name="password">
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                        <button type="submit" class="btn btn-primary btn-block" th:onclick="'window.location.href = \'' + @{/userBookings} + '\''">Entrar</button>
                         <button type="button" class="btn btn-link">¿Ha olvidado su contraseña?</button>
                         <button type="button" class="btn btn-light btn-block" th:onclick="'window.location.href = \'' + @{/create-account} + '\''" >Crear cuenta</button>
 
