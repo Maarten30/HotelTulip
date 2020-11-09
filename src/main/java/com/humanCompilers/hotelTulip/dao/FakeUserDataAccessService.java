@@ -41,6 +41,8 @@ public class FakeUserDataAccessService implements UserDao {
 
         applicationUsers  = new ArrayList<>();
         applicationUsers.add(new User(
+                "Tom",
+                "Brusse",
                 "tom@gmail.com",
                 passwordEncoder.encode("password"),
                 null,

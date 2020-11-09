@@ -211,7 +211,7 @@ public class TemplateController {
 
     @GetMapping("/registration")
     public ModelAndView showRegistrationForm() {
-        ModelAndView modelAndView = new ModelAndView("Registration");
+        ModelAndView modelAndView = new ModelAndView("CreateAccount");
         User newUser = new User();
         modelAndView.addObject("newUser", newUser); // key, value
         return modelAndView;

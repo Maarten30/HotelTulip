@@ -26,17 +26,24 @@ public class User implements UserDetails {
     private boolean isCredentialsNonExpired;
     private boolean isEnabled;
 
+    private String firstname;
+    private String lastname;
 
-    public User (String username,
+    public User (String firstname,
+                 String lastname,
+                 String username,
                            String password,
                            Collection<? extends GrantedAuthority> grantedAuthorities,
                            boolean isAccountNonExpired,
                            boolean isAccountNonLocked,
                            boolean isCredentialsNonExpired,
-                           boolean isEnabled) {
+                           boolean isEnabled
+                 ) {
         this.grantedAuthorities = grantedAuthorities;
         this.password = password;
         this.username = username;
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.isAccountNonExpired = isAccountNonExpired;
         this.isAccountNonLocked = isAccountNonLocked;
         this.isCredentialsNonExpired = isCredentialsNonExpired;
@@ -52,6 +59,10 @@ public class User implements UserDetails {
     public String getUsername() {
         return username;
     }
+
+    public String getFirstname() { return firstname;}
+
+    public String getLastname() { return lastname;}
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -81,13 +92,15 @@ public class User implements UserDetails {
     @Override
     public String toString() {
         return "User{" +
-                "email='" + username + '\'' +
+                "username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", grantedAuthorities=" + grantedAuthorities +
                 ", isAccountNonExpired=" + isAccountNonExpired +
                 ", isAccountNonLocked=" + isAccountNonLocked +
                 ", isCredentialsNonExpired=" + isCredentialsNonExpired +
                 ", isEnabled=" + isEnabled +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
                 '}';
     }
 }
