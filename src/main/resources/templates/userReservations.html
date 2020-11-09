@@ -34,7 +34,15 @@
         <li th:each="reserva: ${Reservas}"  class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1" th:text="'ID_Reserva: ' + ${reserva.getId()}"></h5>
-                <button type="button" class="btn btn-danger">Eliminar</button>
+                <!--<form th:action="@{/userBookings}" method="delete">
+                    <input type="hidden" name="id" th:value="${reserva.getId()}">-->
+                <!-- <button type="button" class="btn btn-danger" th:onclick="'window.location.href = \'' + @{/userBookings/(id=${reserva.getId()})} + '\''">Eliminar</button>-->
+             <!--</form>-->
+                <form action="#" th:action="@{'/userBookings/{id}'(id=${reserva.getId()})}" th:method="post" >
+                    <input type="hidden" name="_method" value="delete" />
+                    <button type="submit" class="btn btn-danger" id="submitButton"> Eliminar </button>
+                </form>
+
             </div>
             <h7 class="mb-1 infoRes" th:text="'Fecha entrada: ' + ${reserva.getCheckinDate()}"> </h7>
             <h7 class="mb-1 infoRes" th:text="'Fecha salida: ' + ${reserva.getCheckoutDate()}">  </h7>

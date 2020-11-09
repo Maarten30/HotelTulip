@@ -86,14 +86,12 @@ public class ReservationService {
             Room aux_room = new Room();
             aux_room.setId(room.getId());
             aux_room.setType(room.getType());
+            rooms_cloned.add(aux_room);
         });
 
         rooms_cloned.removeIf(r -> r.getType() != roomType);
 
-        System.out.println("El listado de rooms despues de filtrado es: ");
-        System.out.println(rooms);
-
-        for (Room room:rooms) {
+        for (Room room:rooms_cloned) {
             boolean occupied = false;
             UUID id = room.getId();
 

@@ -12,6 +12,9 @@ import com.humanCompilers.hotelTulip.service.TarifaService;
 import com.humanCompilers.hotelTulip.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -128,49 +131,54 @@ public class TemplateController {
 
         ModelAndView modelAndView = new ModelAndView("userReservations");
 
-        List<Reservation> reservas = reservationService.getAllReservations();
+        List<Reservation> reservations = reservationService.getAllReservations();
 
-        modelAndView.addObject("Reservas", reservas);
+        Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = "";
+        if(user instanceof UserDetails){
+            username = ((UserDetails)user).getUsername();
+        } else {
+            username = user.toString();
+        }
+
+        System.out.println(username);
+
+
+        modelAndView.addObject("Reservas", reservations);
 
         return modelAndView;
     }
 
-    //*@DeleteMapping("/userBookings")
-    //    public ModelAndView deleteBookings(@RequestParam(value="Id", required = true) UUID id){
-    //
-    //        System.out.println("El Id recibido es:");
-    //        System.out.println(id);
-    //
-    //        ModelAndView modelAndView = new ModelAndView();
-    //
-    //        modelAndView.setViewName("userReservations");
-    //        modelAndView.
-    //
-    //        return modelAndView;
-    //    }
+    @PostMapping("/userBookings/{id}")
+    public ModelAndView deleteBookings(@PathVariable UUID id){
+
+        System.out.println("El Id recibido es: ");
+        System.out.println(id);
+
+        reservationService.deleteReservationById(id);
+
+        List<Reservation> reservations = reservationService.getAllReservations();
+
+        ModelAndView modelAndView = new ModelAndView("userReservations");
+        modelAndView.addObject("Reservas", reservations);
+
+        return modelAndView;
+   }
 
     @PostMapping("/reservations")
     public ModelAndView createReservation(@RequestParam(value = "checkinDate", required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkin,
                                           @RequestParam(value = "checkoutDate", required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkout,
                                           @RequestParam(value = "people", required = true) Integer people) {
-        System.out.println("La primera fecha recibida es: ");
-        System.out.println(checkin);
-        System.out.println("La segunda fecha recibida es: ");
-        System.out.println(checkout);
-        System.out.println("El int de people recibido es: " + people.toString());
 
         Room available_room = null;
         Reservation reservation = new Reservation();
 
         if(people == 1) {
-            System.out.println("Entra en 1");
             available_room = reservationService.CheckAvailability(checkin, checkout, RoomType.SINGLE);
             System.out.println(available_room);
         } else if(people == 2) {
-            System.out.println("Entra en 2");
             available_room = reservationService.CheckAvailability(checkin, checkout, RoomType.DOUBLE);
         } else {
-            System.out.println("Entra en 3");
             available_room = reservationService.CheckAvailability(checkin, checkout, RoomType.TRIPLE);
         }
 
