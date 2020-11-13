@@ -26,7 +26,7 @@
         <section class="container-fluid bg">
             <section class="row justify-content-center">
                 <section class="col-12 col-sm-6 col-md-3">
-                    <form class="form-container" th:method="post" th:action="@{/login}">
+                    <form class="form-container" th:method="post" th:action="@{/user/login}">
                         <div class="form-group">
                             <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Correo electrónico" name="email">
                             <small id="emailHelp" class="form-text text-muted">Su correo nunca será compartido con nadie.</small>
@@ -36,8 +36,8 @@
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">Entrar</button>
                         <button type="button" class="btn btn-link">¿Ha olvidado su contraseña?</button>
-                        <button type="button" class="btn btn-light btn-block" th:onclick="'window.location.href = \'' + @{/create-account} + '\''" >Crear cuenta</button>
-
+                        <button type="button" class="btn btn-light btn-block"  th:onclick="'window.location.href = \'' + @{/user/registration} + '\''">Crear cuenta</button>
+                        <!-- th:onclick="'window.location.href = \'' + @{/registration} + '\''" -->
                     </form>
                 </section>
             </section>

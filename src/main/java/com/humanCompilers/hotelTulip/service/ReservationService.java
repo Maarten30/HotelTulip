@@ -1,74 +1,79 @@
 package com.humanCompilers.hotelTulip.service;
 
-
-import com.humanCompilers.hotelTulip.dao.ReservationDao;
 import com.humanCompilers.hotelTulip.dao.ReservationRepository;
 import com.humanCompilers.hotelTulip.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class ReservationService {
 
-    private final ReservationDao reservationDao;
     private final ReservationRepository reservationRepository;
     private final TarifaService tarifaService;
     private final RoomService roomService;
 
     @Autowired
-    public ReservationService(@Qualifier("fakeReservationDao") ReservationDao reservationDao,
-                              TarifaService tarifaService,
-                              RoomService roomService, ReservationRepository reservationRepository) {
-        this.reservationDao = reservationDao;
+    public ReservationService(TarifaService tarifaService,
+                              RoomService roomService,
+                              ReservationRepository reservationRepository) {
         this.tarifaService = tarifaService;
         this.roomService = roomService;
         this.reservationRepository = reservationRepository;
     }
 
-    public int addReservation(Reservation reservation) {
-        return reservationDao.insertReservation(reservation);
+
+    public Reservation addReservation(Reservation reservation) {
+        return reservationRepository.save(reservation);
     }
 
     public List<Reservation> getAllReservations() {
-        return reservationDao.selectAllReservations();
+        List<Reservation> reservations =  new ArrayList<>();
+        // Parse 'Iterable' to 'List'
+        reservationRepository.findAll().forEach(r -> {
+            reservations.add(r);
+        });
+        return reservations;
     }
 
-    public Reservation getReservationById(UUID id) {
-        return reservationDao.selectReservationById(id);
-    }
+    public Reservation getReservationById(UUID id) { return reservationRepository.findById(id).get(); }
 
-    public int deleteReservationById(UUID id) {
-        return reservationDao.deleteReservationById(id);
-    }
+    public int deleteReservationById(UUID id) { reservationRepository.deleteById(id); return 1; }
 
+    // Si hace falta esto se podria descomponer en un metodo por atributo a actualizar
     public int updateReservationById(UUID id, Reservation newReservation) {
-        return reservationDao.updateReservationById(id, newReservation);
+        // Get
+        Reservation db_reservation = getReservationById(id);
+        // Update
+        db_reservation.setTotalPrice(newReservation.getTotalPrice());
+        db_reservation.setReservedRoom(newReservation.getReservedRoom());
+        db_reservation.setCheckinDate(newReservation.getCheckinDate());
+        db_reservation.setCheckoutDate(newReservation.getCheckoutDate());
+        // Save Updated
+        reservationRepository.save(db_reservation);
+        return 1;
     }
 
     public Double calculateTotalPrice(LocalDate starting_date, LocalDate ending_date, HotelRoom reservedRoom) {
 
         Double totalPrice = 0.0;
-
-        Tarifa tarifa_actual = new Tarifa();
-
+        Tarifa tarifa_actual;
         List<Tarifa> tarifas =  tarifaService.getAllTarifas();
 
         while( starting_date.isBefore(ending_date)){
             // Saca la tarifa del dia
             tarifa_actual = tarifaService.calculateHotelRoomTarifa(starting_date, tarifas, reservedRoom);
             // Le suma al precio total, el precio de la tarifa de ese dia
-            totalPrice += tarifa_actual.getPrice();
+            if(tarifa_actual != null)
+                totalPrice += tarifa_actual.getPrice();
             // Le suma un dia al starting date, para analizar el siguiente dia
             starting_date = starting_date.plusDays(1);
-            System.out.println(starting_date.toString());
         }
-
         return totalPrice;
     }
 
@@ -90,25 +95,32 @@ public class ReservationService {
 
         rooms_cloned.removeIf(r -> r.getHotelRoomType() != hotelRoomType);
 
-        for (HotelRoom room:rooms_cloned) {
-            boolean occupied = false;
-            UUID id = room.getId();
+        if (rooms_cloned.size() > 0) {
+            if(reservations.size() > 0) {
+                for (HotelRoom room:rooms_cloned) {
+                    boolean occupied = false;
+                    UUID id = room.getId();
 
-            for (Reservation reservation:reservations) {
-                if(reservation.getReservedRoom().getId().equals(id))
-                    if(!(checkin.isAfter(reservation.getCheckoutDate()) ||
-                            checkOut.isBefore(reservation.getCheckinDate()))){
-                        occupied = true;
-                    } else {
-                        occupied = false;
+                    for (Reservation reservation:reservations) {
+                        if(reservation.getReservedRoom().getId().equals(id))
+                            if(!(checkin.isAfter(reservation.getCheckoutDate()) ||
+                                    checkOut.isBefore(reservation.getCheckinDate()))){
+                                occupied = true;
+                            } else {
+                                occupied = false;
+                                break;
+                            }
+                    }
+                    if(!occupied) {
+                        freeRoom = room;
                         break;
                     }
-            }
-            if(!occupied) {
-                freeRoom = room;
-                break;
+                }
+            } else {
+                freeRoom = rooms_cloned.stream().findFirst().orElse(null);
             }
         }
+
 
         return freeRoom;
     }

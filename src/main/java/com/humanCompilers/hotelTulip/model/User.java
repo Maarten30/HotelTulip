@@ -1,5 +1,6 @@
 package com.humanCompilers.hotelTulip.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.javafx.beans.IDProperty;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,14 +22,20 @@ public class User implements UserDetails {
     @NotEmpty
     @NotNull
     @Id
+    @JsonProperty("email")
     private String username;
 
+    @JsonProperty("firstname")
     private String firstName;
+
+    @JsonProperty("lastname")
     private String lastName;
 
     @NotEmpty
     @NotNull
+    @JsonProperty("password")
     private String password;
+
     @Transient
     private Collection<? extends GrantedAuthority> grantedAuthorities;
     @Transient

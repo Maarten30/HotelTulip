@@ -1,78 +1,104 @@
 package com.humanCompilers.hotelTulip.service;
 
-import com.humanCompilers.hotelTulip.dao.RoomDao;
-import com.humanCompilers.hotelTulip.model.HotelRoom;
-import com.humanCompilers.hotelTulip.model.MeetingRoom;
-import com.humanCompilers.hotelTulip.model.Room;
+import com.humanCompilers.hotelTulip.dao.HotelRoomRepository;
+import com.humanCompilers.hotelTulip.dao.MeetingRoomRepository;
+import com.humanCompilers.hotelTulip.dao.RoomRepository;
+import com.humanCompilers.hotelTulip.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class RoomService {
 
-    private final RoomDao roomDao;
+    private final RoomRepository roomRepository;
+    private final HotelRoomRepository hotelRoomRepository;
+    private final MeetingRoomRepository meetingRoomRepository;
 
     @Autowired
-    public RoomService(@Qualifier("fakeRoomDao") RoomDao roomDao) {
-        this.roomDao = roomDao;
+    public RoomService(RoomRepository roomRepository,
+                       HotelRoomRepository hotelRoomRepository,
+                       MeetingRoomRepository meetingRoomRepository) {
+        this.roomRepository = roomRepository;
+        this.hotelRoomRepository = hotelRoomRepository;
+        this.meetingRoomRepository = meetingRoomRepository;
     }
 
-    // HotelRoom service
-
-    public int addHotelRoom(HotelRoom room) {
-        return 0;
+    // PARENT ROOM SERVICE
+    public int addRooms(List<Room> rooms) {
+        roomRepository.saveAll(rooms);
+        return 1;
     }
 
-    public int addHotelRoom(UUID id, HotelRoom room) {
-        return 0;
+    public Room addRoom(Room room) { return roomRepository.save(room); }
+
+    public List<Room> getAllRooms() {
+        List<Room> rooms = new ArrayList<>();
+        Iterable<Room> db_rooms = roomRepository.findAll();
+
+        db_rooms.forEach(r -> {
+            rooms.add(r);
+        });
+        return rooms;
+    }
+
+    // HOTEL ROOM SERVICE
+    public HotelRoom addHotelRoom(HotelRoom room) {
+        return hotelRoomRepository.save(room);
     }
 
     public List<HotelRoom> getAllHotelRooms() {
-       // return roomDao.selectAllRooms();
-        return null;
+        List<HotelRoom> hotelRooms = new ArrayList<>();
+        Iterable<HotelRoom> db_hotelRooms= hotelRoomRepository.findAll();
+
+        db_hotelRooms.forEach(r -> {
+            hotelRooms.add(r);
+        });
+        return hotelRooms;
     }
 
-    public Room getHotelRoomById(UUID id) {
-        return null;
+    public HotelRoom getHotelRoomById(UUID id) {
+        return hotelRoomRepository.findById(id).get();
     }
 
-    public int deleteHotelRoomById(UUID id) {
-        return 0;
+    public int deleteHotelRoomById(UUID id) { hotelRoomRepository.deleteById(id); return 1; }
+
+    public HotelRoom updateHotelRoomTypeById(UUID id, HotelRoomType newRoomType) {
+        HotelRoom db_hotelRoom = getHotelRoomById(id);
+        db_hotelRoom.setHotelRoomType(newRoomType);
+
+        return hotelRoomRepository.save(db_hotelRoom);
     }
 
-    public int updateHotelRoomById(UUID id, HotelRoom newRoom) {
-        return 0;
+    // MEETING ROOM SERVICE
+    public MeetingRoom addMeetingRoom(MeetingRoom room) {
+        return meetingRoomRepository.save(room);
     }
 
-    // MeetingRoom service
-
-    public int addMeetingRoom(MeetingRoom room) {
-        return 0;
-    }
-
-    public int addMeetingRoom(UUID id, MeetingRoom room) {
-        return 0;
-    }
 
     public List<MeetingRoom> getAllMeetingRooms() {
-       // return roomDao.selectAllRooms();
-        return null;
+        List<MeetingRoom> meetingRooms = new ArrayList<>();
+        Iterable<MeetingRoom> db_meetingRooms= meetingRoomRepository.findAll();
+
+        db_meetingRooms.forEach(r -> {
+            meetingRooms.add(r);
+        });
+        return meetingRooms;
     }
 
-    public Room getMeetingRoomById(UUID id) {
-        return null;
+    public MeetingRoom getMeetingRoomById(UUID id) {
+        return meetingRoomRepository.findById(id).get();
     }
 
-    public int deleteMeetingRoomById(UUID id) {
-        return 0;
-    }
+    public int deleteMeetingRoomById(UUID id) { meetingRoomRepository.deleteById(id); return 1; }
 
-    public int updateMeetingRoomById(UUID id, MeetingRoom newRoom) {
-        return 0;
+    public MeetingRoom updateMeetingRoomById(UUID id, MeetingRoomType newRoomType) {
+        MeetingRoom db_meetingRoom = getMeetingRoomById(id);
+        db_meetingRoom.setMeetingRoomType(newRoomType);
+
+        return meetingRoomRepository.save(db_meetingRoom);
     }
 }

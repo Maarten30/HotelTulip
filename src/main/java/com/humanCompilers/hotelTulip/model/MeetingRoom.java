@@ -13,17 +13,17 @@ import java.util.UUID;
 @Entity
 public class MeetingRoom extends Room{
 
-    private MeetingRoomType type;
+    private MeetingRoomType meetingRoomType;
 
-    public MeetingRoom ( UUID id, MeetingRoomType type) {
+    public MeetingRoom ( UUID id, MeetingRoomType meetingRoomType) {
         super(id);
-        this.type = type;
+        this.meetingRoomType = meetingRoomType;
     }
 
     @Override
     public String toString() {
         return "MeetingRoom{" +
-                "type=" + type +
+                "type=" + meetingRoomType +
                 '}';
     }
 }

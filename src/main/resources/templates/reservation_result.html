@@ -37,9 +37,10 @@
                         <ul th:text="'Id_reserva: ' + ${reservation.getId()}"> </ul>
                         <ul th:text="'Fecha entrada: ' + ${reservation.getCheckinDate()}"> </ul>
                         <ul th:text="'Fecha salida: ' + ${reservation.getCheckoutDate()}"> </ul>
-                        <ul th:text="'Habitación/Sala reservada: ' + ${reservation.getReservedRoom().getType()}"> </ul>
+                        <!-- Hay que ver como solucionar esta linea comentada -->
+                        <!-- <ul th:text="'Habitación/Sala reservada: ' + ${reservation.getReservedRoom().getType()}"> </ul>-->
                         <ul th:text="'Precio Total (IVA incluido): ' + ${reservation.getTotalPrice()} + '€'"> </ul>
-                        <a href="/reservations">Submit another Reservation</a>
+                        <a th:href="@{/reservations/newReservation}">Submit another Reservation</a>
                     </div>
                 </div>
             </div>

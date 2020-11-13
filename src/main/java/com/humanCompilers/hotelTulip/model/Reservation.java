@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -19,6 +20,8 @@ public class Reservation {
     // Cuando hagamos la parte de usuarios igual podemos añadirle a esta clase un nombre de usuario
 
     @Id
+    @GeneratedValue
+    @Column(columnDefinition = "BINARY(16)")
     private UUID id;
 
     @ManyToOne
@@ -33,17 +36,14 @@ public class Reservation {
     private Room reservedRoom;
     private Double totalPrice;
 
-    public Reservation(@JsonProperty("id") UUID id, @JsonProperty("checkin") LocalDate checkinDate,
-                       @JsonProperty("checkout") LocalDate checkoutDate, @JsonProperty("room") Room reservedRoom) {
+    public Reservation( UUID id, LocalDate checkinDate, LocalDate checkoutDate, Room reservedRoom) {
         this.id = id;
         this.checkoutDate = checkoutDate;
         this.checkinDate = checkinDate;
         this.reservedRoom = reservedRoom;
     }
 
-    public Reservation(@JsonProperty("id") UUID id, @JsonProperty("checkin") LocalDate checkinDate,
-                       @JsonProperty("checkout") LocalDate checkoutDate, @JsonProperty("room") Room reservedRoom,
-                       @JsonProperty("totalPrice") Double totalPrice) {
+    public Reservation(UUID id, LocalDate checkinDate, LocalDate checkoutDate, Room reservedRoom, Double totalPrice) {
         this.id = id;
         this.checkoutDate = checkoutDate;
         this.checkinDate = checkinDate;

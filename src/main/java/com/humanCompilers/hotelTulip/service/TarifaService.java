@@ -1,10 +1,8 @@
 package com.humanCompilers.hotelTulip.service;
 
-import com.humanCompilers.hotelTulip.dao.TarifaDao;
 import com.humanCompilers.hotelTulip.dao.TarifaRepository;
 import com.humanCompilers.hotelTulip.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -21,11 +19,9 @@ public class TarifaService {
         this.tarifaRepository =  tarifaRepository;
     }
 
-    public int addTarifa(Tarifa tarifa) {
+    public Tarifa addTarifa(Tarifa tarifa) { return tarifaRepository.save(tarifa); }
 
-        tarifaRepository.save(tarifa);
-        return 1;
-    }
+    public Tarifa getTarifaById(Integer id) { return tarifaRepository.findById(id).get(); }
 
     public List<Tarifa> getAllTarifas() {
 
@@ -35,6 +31,21 @@ public class TarifaService {
             tarifas.add(tarifa);
         });
         return tarifas;
+    }
+
+    public int deleteTarifa(Integer id) { tarifaRepository.deleteById(id); return 1;}
+
+    public int deleteAllTarifas() { tarifaRepository.deleteAll(); return 1; }
+
+    public Tarifa updateTarifa(Integer id, Tarifa newTarifa) {
+        Tarifa db_tarifa = getTarifaById(id);
+
+        db_tarifa.setStarting_date(newTarifa.getStarting_date());
+        db_tarifa.setEnding_date(newTarifa.getEnding_date());
+        db_tarifa.setPrice(newTarifa.getPrice());
+        db_tarifa.setSeason(newTarifa.getSeason());
+
+        return tarifaRepository.save(db_tarifa);
     }
 
 
