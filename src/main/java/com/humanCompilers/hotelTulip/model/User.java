@@ -1,33 +1,45 @@
 package com.humanCompilers.hotelTulip.model;
 
+import com.sun.javafx.beans.IDProperty;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
 
 @NoArgsConstructor
 @Setter
+@Entity
 public class User implements UserDetails {
 
     @NotEmpty
     @NotNull
+    @Id
     private String username;
+
+    private String firstName;
+    private String lastName;
 
     @NotEmpty
     @NotNull
     private String password;
+    @Transient
     private Collection<? extends GrantedAuthority> grantedAuthorities;
+    @Transient
     private boolean isAccountNonExpired;
+    @Transient
     private boolean isAccountNonLocked;
+    @Transient
     private boolean isCredentialsNonExpired;
+    @Transient
     private boolean isEnabled;
 
-    private String firstname;
-    private String lastname;
 
     public User (String firstname,
                  String lastname,
@@ -42,8 +54,8 @@ public class User implements UserDetails {
         this.grantedAuthorities = grantedAuthorities;
         this.password = password;
         this.username = username;
-        this.firstname = firstname;
-        this.lastname = lastname;
+        this.firstName = firstname;
+        this.lastName = lastname;
         this.isAccountNonExpired = isAccountNonExpired;
         this.isAccountNonLocked = isAccountNonLocked;
         this.isCredentialsNonExpired = isCredentialsNonExpired;
@@ -60,9 +72,9 @@ public class User implements UserDetails {
         return username;
     }
 
-    public String getFirstname() { return firstname;}
+    public String getFirstName() { return firstName;}
 
-    public String getLastname() { return lastname;}
+    public String getLastName() { return lastName;}
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -99,8 +111,8 @@ public class User implements UserDetails {
                 ", isAccountNonLocked=" + isAccountNonLocked +
                 ", isCredentialsNonExpired=" + isCredentialsNonExpired +
                 ", isEnabled=" + isEnabled +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
+                ", firstname='" + firstName + '\'' +
+                ", lastname='" + lastName + '\'' +
                 '}';
     }
 }

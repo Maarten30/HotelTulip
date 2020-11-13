@@ -1,12 +1,11 @@
 package com.humanCompilers.hotelTulip.dao;
 
 import com.humanCompilers.hotelTulip.model.Room;
-import com.humanCompilers.hotelTulip.model.RoomType;
+import com.humanCompilers.hotelTulip.model.HotelRoomType;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Repository("fakeRoomDao")
@@ -15,25 +14,25 @@ public class FakeRoomDataAccessService implements RoomDao {
     private static List<Room> DB = new ArrayList<>();
 
     public FakeRoomDataAccessService() {
-        Room room1 = new Room(UUID.randomUUID(), RoomType.SINGLE);
-        Room room2 = new Room(UUID.randomUUID(), RoomType.DOUBLE);
-        Room room3 = new Room(UUID.randomUUID(), RoomType.TRIPLE);
-        Room room4 = new Room(UUID.randomUUID(), RoomType.SINGLE);
-        Room room5 = new Room(UUID.randomUUID(), RoomType.DOUBLE);
-        Room room6 = new Room(UUID.randomUUID(), RoomType.TRIPLE);
+        /*Room room1 = new Room(UUID.randomUUID(), HotelRoomType.SINGLE);
+        Room room2 = new Room(UUID.randomUUID(), HotelRoomType.DOUBLE);
+        Room room3 = new Room(UUID.randomUUID(), HotelRoomType.TRIPLE);
+        Room room4 = new Room(UUID.randomUUID(), HotelRoomType.SINGLE);
+        Room room5 = new Room(UUID.randomUUID(), HotelRoomType.DOUBLE);
+        Room room6 = new Room(UUID.randomUUID(), HotelRoomType.TRIPLE);
 
         DB.add(room1);
         DB.add(room2);
         DB.add(room3);
         DB.add(room4);
         DB.add(room5);
-        DB.add(room6);
+        DB.add(room6);*/
 
     }
 
     @Override
     public int insertRoom(UUID id, Room room) {
-        DB.add(new Room(id, room.getType()));
+        /*DB.add(new Room(id, room.getType()));*/
         return 1;
     }
 
@@ -66,13 +65,14 @@ public class FakeRoomDataAccessService implements RoomDao {
     @Override
     public int updateRoomById(UUID id, Room updateRoom) {
 
-        Room aux = selectRoomById(id);
+        /*Room aux = selectRoomById(id);
         int indexOfRoomToUpdate = DB.indexOf(aux);
         if (indexOfRoomToUpdate >= 0) {
             DB.set(indexOfRoomToUpdate, new Room(id, updateRoom.getType()));
             return 1;
         } else {
             return 0;
-        }
+        }*/
+        return 0;
     }
 }

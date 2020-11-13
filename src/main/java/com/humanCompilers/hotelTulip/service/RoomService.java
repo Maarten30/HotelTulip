@@ -1,6 +1,8 @@
 package com.humanCompilers.hotelTulip.service;
 
 import com.humanCompilers.hotelTulip.dao.RoomDao;
+import com.humanCompilers.hotelTulip.model.HotelRoom;
+import com.humanCompilers.hotelTulip.model.MeetingRoom;
 import com.humanCompilers.hotelTulip.model.Room;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,27 +22,57 @@ public class RoomService {
         this.roomDao = roomDao;
     }
 
-    public int addRoom(Room room) {
-        return roomDao.insertRoom(room);
+    // HotelRoom service
+
+    public int addHotelRoom(HotelRoom room) {
+        return 0;
     }
 
-    public int addRoom(UUID id, Room room) {
-        return roomDao.insertRoom(id, room);
+    public int addHotelRoom(UUID id, HotelRoom room) {
+        return 0;
     }
 
-    public List<Room> getAllRooms() {
-        return roomDao.selectAllRooms();
+    public List<HotelRoom> getAllHotelRooms() {
+       // return roomDao.selectAllRooms();
+        return null;
     }
 
-    public Room getRoomById(UUID id) {
-        return roomDao.selectRoomById(id);
+    public Room getHotelRoomById(UUID id) {
+        return null;
     }
 
-    public int deleteRoomById(UUID id) {
-        return roomDao.deleteRoomById(id);
+    public int deleteHotelRoomById(UUID id) {
+        return 0;
     }
 
-    public int updateRoomById(UUID id, Room newRoom) {
-        return roomDao.updateRoomById(id, newRoom);
+    public int updateHotelRoomById(UUID id, HotelRoom newRoom) {
+        return 0;
+    }
+
+    // MeetingRoom service
+
+    public int addMeetingRoom(MeetingRoom room) {
+        return 0;
+    }
+
+    public int addMeetingRoom(UUID id, MeetingRoom room) {
+        return 0;
+    }
+
+    public List<MeetingRoom> getAllMeetingRooms() {
+       // return roomDao.selectAllRooms();
+        return null;
+    }
+
+    public Room getMeetingRoomById(UUID id) {
+        return null;
+    }
+
+    public int deleteMeetingRoomById(UUID id) {
+        return 0;
+    }
+
+    public int updateMeetingRoomById(UUID id, MeetingRoom newRoom) {
+        return 0;
     }
 }

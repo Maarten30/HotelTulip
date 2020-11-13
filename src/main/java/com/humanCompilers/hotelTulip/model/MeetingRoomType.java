@@ -2,9 +2,9 @@ package com.humanCompilers.hotelTulip.model;
 
 public enum MeetingRoomType {
 
-    grupoGrande("grupoGrande"),
-    grupoReducido("grupoReducido"),
-    conferencia("conferencia");
+    SMALL("grupoGrande"),
+    MEDIUM("grupoReducido"),
+    LARGE("conferencia");
 
     private final String meetingRoomType;
 

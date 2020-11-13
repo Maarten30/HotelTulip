@@ -1,18 +1,13 @@
 package com.humanCompilers.hotelTulip.controller;
 
 
-import com.humanCompilers.hotelTulip.model.Reservation;
-import com.humanCompilers.hotelTulip.model.Room;
-import com.humanCompilers.hotelTulip.model.User;
-import com.humanCompilers.hotelTulip.model.RoomType;
-import com.humanCompilers.hotelTulip.model.Tarifa;
+import com.humanCompilers.hotelTulip.model.*;
 import com.humanCompilers.hotelTulip.service.ReservationService;
 import com.humanCompilers.hotelTulip.service.RoomService;
 import com.humanCompilers.hotelTulip.service.TarifaService;
 import com.humanCompilers.hotelTulip.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -20,9 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 public class TemplateController {
@@ -39,7 +32,7 @@ public class TemplateController {
         this.roomService = roomService;
         this.tarifaService = tarifaService;
         this.userService = userService;
-    }
+     }
 
     @GetMapping("/")
     public ModelAndView index() {
@@ -48,6 +41,30 @@ public class TemplateController {
 
         modelAndView.addObject("name", "Laura");
         //model.addAttribute("name", "Laura");
+
+
+
+        /*String sql = "select id, name from person";
+        List<Map<String, Object>> listMapQuery = jdbcTemplate.queryForList(sql);
+        List<String> personList = new ArrayList<>();
+        listMapQuery.forEach(singer -> personList.add(singer.toString()));
+
+        System.out.println(personList);*/
+
+        /*final String sql = "SELECT id, name FROM Person WHERE id = ?";
+
+        Person person = jdbcTemplate.queryForObject(
+                sql,
+                new Object[]{"341A"},
+                (resultSet, i) -> {
+                    String personId = resultSet.getString("id");
+                    String name = resultSet.getString("name");
+                    return new Person(personId, name);
+                });
+
+        System.out.println("La persona es: ");
+        System.out.println(person);*/
+
 
         return modelAndView;
     }
@@ -173,13 +190,13 @@ public class TemplateController {
         Room available_room = null;
         Reservation reservation = new Reservation();
 
-        if(people == 1) {
-            available_room = reservationService.CheckAvailability(checkin, checkout, RoomType.SINGLE);
+        /*if(people == 1) {
+            available_room = reservationService.CheckHotelRoomAvailability(checkin, checkout, HotelRoomType.SINGLE);
             System.out.println(available_room);
         } else if(people == 2) {
-            available_room = reservationService.CheckAvailability(checkin, checkout, RoomType.DOUBLE);
+            available_room = reservationService.CheckHotelRoomAvailability(checkin, checkout, HotelRoomType.DOUBLE);
         } else {
-            available_room = reservationService.CheckAvailability(checkin, checkout, RoomType.TRIPLE);
+            available_room = reservationService.CheckHotelRoomAvailability(checkin, checkout, HotelRoomType.TRIPLE);
         }
 
         if(available_room != null) {
@@ -199,7 +216,7 @@ public class TemplateController {
             reservation.setId(UUID.randomUUID());
             // Save the reservation
             reservationService.addReservation(reservation);
-        }
+        }*/
 
         // View with result
         ModelAndView modelAndView = new ModelAndView();

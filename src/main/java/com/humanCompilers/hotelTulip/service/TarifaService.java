@@ -1,42 +1,51 @@
 package com.humanCompilers.hotelTulip.service;
 
 import com.humanCompilers.hotelTulip.dao.TarifaDao;
-import com.humanCompilers.hotelTulip.model.Room;
-import com.humanCompilers.hotelTulip.model.Tarifa;
+import com.humanCompilers.hotelTulip.dao.TarifaRepository;
+import com.humanCompilers.hotelTulip.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class TarifaService {
 
-    private final TarifaDao tarifaDao;
+    private final TarifaRepository tarifaRepository;
 
     @Autowired
-    public TarifaService(@Qualifier("fakeTarifaDao") TarifaDao tarifaDao) {
-        this.tarifaDao = tarifaDao;
+    public TarifaService(TarifaRepository tarifaRepository) {
+        this.tarifaRepository =  tarifaRepository;
     }
 
     public int addTarifa(Tarifa tarifa) {
-        return tarifaDao.insertTarifa(tarifa);
+
+        tarifaRepository.save(tarifa);
+        return 1;
     }
 
     public List<Tarifa> getAllTarifas() {
-        return tarifaDao.selectAllTarifas();
+
+        Iterable <Tarifa> tarifasDB = tarifaRepository.findAll();
+        List<Tarifa> tarifas = new ArrayList<>();
+        tarifasDB.forEach(tarifa -> {
+            tarifas.add(tarifa);
+        });
+        return tarifas;
     }
 
 
-    public static Tarifa calcularTarifa(LocalDate date, List<Tarifa> tarifas, Room room) {
+    public static Tarifa calculateHotelRoomTarifa(LocalDate date, List<Tarifa> tarifas, HotelRoom room) {
 
         // Saca la tarifa, mirando si la fecha esta entre las dos fechas que limitan la tarifa y
         // tambien comparando el tipo de habitacion
         Tarifa tarifa_sacada = tarifas.stream()
                 .filter(t -> date.isAfter(t.getStarting_date()) &&
                         date.isBefore(t.getEnding_date())&&
-                        t.getRoom_type().equals(room.getType()))
+                        t.getRoom_type().equals(room.getHotelRoomType()))
                 .findFirst()
                 .orElse(null);
 
@@ -45,7 +54,7 @@ public class TarifaService {
             tarifa_sacada = tarifas.stream()
                     .filter(t -> (date.equals(t.getStarting_date()) ||
                             date.equals(t.getEnding_date())) &&
-                            room.getType().equals(t.getRoom_type()))
+                            room.getHotelRoomType().equals(t.getRoom_type()))
                     .findFirst()
                     .orElse(null);
         }

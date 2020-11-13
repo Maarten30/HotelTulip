@@ -6,21 +6,30 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@Entity
 public class Reservation {
 
     // Cuando hagamos la parte de usuarios igual podemos añadirle a esta clase un nombre de usuario
 
+    @Id
     private UUID id;
+
+    @ManyToOne
+    private User user;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate checkinDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate checkoutDate;
+
+    @ManyToOne
     private Room reservedRoom;
     private Double totalPrice;
 

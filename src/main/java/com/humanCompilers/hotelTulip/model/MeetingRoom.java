@@ -4,26 +4,26 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Entity;
 import java.util.UUID;
 
 @Getter
 @Setter
 @NoArgsConstructor
-public class MeetingRoom {
+@Entity
+public class MeetingRoom extends Room{
 
-    private UUID id;
     private MeetingRoomType type;
 
-    public MeetingRoom (UUID id, MeetingRoomType type) {
-        this.id = id;
+    public MeetingRoom ( UUID id, MeetingRoomType type) {
+        super(id);
         this.type = type;
     }
 
     @Override
     public String toString() {
         return "MeetingRoom{" +
-                "id=" + id +
-                ", type=" + type +
+                "type=" + type +
                 '}';
     }
 }

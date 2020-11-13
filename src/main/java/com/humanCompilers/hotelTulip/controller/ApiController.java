@@ -43,8 +43,14 @@ public class ApiController {
     @GetMapping("/tarifas")
     public List<Tarifa> getTarifas() { return tarifaService.getAllTarifas(); }
 
-    @GetMapping("/rooms")
-    public List<Room> getRooms() { return roomService.getAllRooms(); }
+    @PostMapping("/tarifas")
+    public String addTarifa(@RequestBody Tarifa tarifa){
+        tarifaService.addTarifa(tarifa);
+        return "Se ha añadido la tari";
+    }
+
+    /*@GetMapping("/rooms")
+    public List<Room> getRooms() { return roomService.getAllRooms(); }*/
 
     /**
      * En realidad este metodo no va a existir aqui porque desde la pagina web no se pueden ver todos los usuarios.
