@@ -2,6 +2,7 @@ package com.humanCompilers.hotelTulip.service;
 
 import com.humanCompilers.hotelTulip.dao.TarifaRepository;
 import com.humanCompilers.hotelTulip.model.*;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@NoArgsConstructor
 public class TarifaService {
 
-    private final TarifaRepository tarifaRepository;
+    private TarifaRepository tarifaRepository;
 
     @Autowired
     public TarifaService(TarifaRepository tarifaRepository) {
@@ -72,4 +74,16 @@ public class TarifaService {
         return tarifa_sacada;
     }
 
+    public void tellMeSometing(int i) {
+
+        if (i < 5) {
+            System.out.println("Lower than 5");
+            return;
+        }
+
+        if (i % 2 == 0) {
+            System.out.println("Even number.");
+            return;
+        }
+    }
 }
