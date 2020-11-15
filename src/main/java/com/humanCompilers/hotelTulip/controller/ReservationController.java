@@ -1,15 +1,13 @@
 package com.humanCompilers.hotelTulip.controller;
 
-import com.humanCompilers.hotelTulip.model.HotelRoom;
-import com.humanCompilers.hotelTulip.model.HotelRoomType;
-import com.humanCompilers.hotelTulip.model.Reservation;
-import com.humanCompilers.hotelTulip.model.Room;
+import com.humanCompilers.hotelTulip.model.*;
 import com.humanCompilers.hotelTulip.service.ReservationService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -157,5 +155,42 @@ public class ReservationController {
         modelAndView.addObject("Reservas", reservations);
 
         return modelAndView;
+    }
+
+    @ModelAttribute("loggedinUser")
+    public User globalUserObject(Model model) {
+
+        String username = "";
+        String firstname = "";
+        boolean activeUser = false;
+
+        // Comprueba si el usuario esta logeado
+        if(SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
+            if(!(SecurityContextHolder.getContext().getAuthentication()
+                    instanceof AnonymousAuthenticationToken) ){
+                // Si entra aqui significa que hay un usario logeado (Descartando el usuario por defecto 'anonymous')
+                activeUser = true;
+            }
+        }
+
+        // Coge el usuario logeado
+        Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if(user instanceof UserDetails){
+            username = ((UserDetails)user).getUsername(); // Si no hay usuario logeado será anonymous
+            if(activeUser)
+                firstname = ((User)user).getFirstName(); // El if es para comprobar que el usuario no sea anonymous
+        }
+
+        User active_user = new User();
+
+        // Create User pojo class
+        active_user.setUsername(username);
+        active_user.setFirstName(firstname);
+
+        model.addAttribute("userActive", activeUser);
+
+        // Este objeto estara disponible en todos los htmls con el nombre 'loggedinUser' definido arriba en @ModelAttribute
+        return active_user;
     }
 }

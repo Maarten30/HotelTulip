@@ -48,9 +48,17 @@
                         <li class="nav-item">
                             <a class="nav-link option" th:href="@{/contact}">CONTACTO</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link option" th:href="@{/user/login}">INICIAR SESIÓN</a>
-                        </li>
+                        <th:block th:if="${userActive}">
+                            <li class="nav-item">
+                                <a class="nav-link option" th:text="${loggedinUser.getFirstName()}"></a>
+                            </li>
+                        </th:block>
+                        <th:block th:unless="${userActive}">
+                            <li class="nav-item">
+                                <a class="nav-link option" th:href="@{/user/login}">INICIAR SESIÓN</a>
+                            </li>
+                        </th:block>
+
                     </ul>
                 </div>
             </div>
