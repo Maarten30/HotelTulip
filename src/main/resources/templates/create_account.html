@@ -24,6 +24,13 @@
     <body>
         <div th:insert="fragments/header :: header"></div>
 
+        <br>
+
+        <th:block th:if="${registrationMessage}">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" th:text="${registrationMessage}">
+            </div>
+        </th:block>
+
         <section class="container-fluid bg">
             <section class="row justify-content-center">
                 <section class="col-12 col-sm-6 col-md-3">

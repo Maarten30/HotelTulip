@@ -50,7 +50,8 @@
                         </li>
                         <th:block th:if="${userActive}">
                             <li class="nav-item">
-                                <a class="nav-link option" th:text="${loggedinUser.getFirstName()}"></a>
+                                <a class="nav-link option" th:text="${loggedinUser.getFirstName()}"
+                                   th:href="@{/reservations/myReservations}"></a>
                             </li>
                         </th:block>
                         <th:block th:unless="${userActive}">
@@ -66,8 +67,8 @@
     </header>
 
     <!--Javascript-->
-    <script th:src="@{js/jquery-3.4.1.min.js}"></script>
-    <script th:src="@{js/index.js}"></script>
+    <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{/js/index.js}"></script>
 
 </body>
 </html>

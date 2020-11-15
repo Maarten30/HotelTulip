@@ -53,9 +53,23 @@ public class AuthController {
         newUser.setEnabled(true);
         System.out.println(newUser);
 
-        userService.createUser(newUser);
+        User prueba = userService.createUser(newUser);
 
-        ModelAndView modelAndView = new ModelAndView("index");
+        ModelAndView modelAndView = new ModelAndView();
+
+        if(prueba != null)
+        {
+            System.out.println(prueba);
+            modelAndView.setViewName("login");
+            System.out.println(newUser.getUsername());
+        } else{
+            System.out.println("soy null");
+            modelAndView.setViewName("create_account");
+            User newUser1 = new User();
+            modelAndView.addObject("newUser", newUser1);
+            modelAndView.addObject("registrationMessage", "Ya existe una cuenta con el email introducido, " +
+                    "por favor, intentelo con otro");
+        }
 
         return modelAndView;
     }

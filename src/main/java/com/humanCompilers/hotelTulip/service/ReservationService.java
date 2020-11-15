@@ -139,4 +139,12 @@ public class ReservationService {
 
         return freeRoom;
     }
+
+    public List<Reservation> getReservationsByUser(User user){
+
+        List<Reservation> reservations = reservationRepository.findAllByUser(user);
+        System.out.println(reservations);
+        return reservations;
+
+    }
 }

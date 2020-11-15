@@ -2,6 +2,8 @@ package com.humanCompilers.hotelTulip.controller;
 
 import com.humanCompilers.hotelTulip.model.*;
 import com.humanCompilers.hotelTulip.service.ReservationService;
+import com.humanCompilers.hotelTulip.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,9 +22,12 @@ import java.util.UUID;
 public class ReservationController {
 
     private final ReservationService reservationService;
+    private final UserService userService;
 
-    public ReservationController(ReservationService reservationService) {
+    @Autowired
+    public ReservationController(ReservationService reservationService, UserService userService) {
         this.reservationService = reservationService;
+        this.userService = userService;
     }
 
     @GetMapping("/newReservation")
@@ -66,8 +71,15 @@ public class ReservationController {
             if(price != null) {
                 // Set the price
                 reservation.setTotalPrice(price);
-                // Set a UUID
-                reservation.setId(UUID.randomUUID());
+                //Set a User
+                Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                User usuario = null;
+
+                if(user instanceof UserDetails){
+                  String username = ((UserDetails)user).getUsername(); // Si no hay usuario logeado será anonymous
+                    usuario = (User) userService.loadUserByUsername(username);
+                }
+                reservation.setUser(usuario);
                 // Save the reservation
                 reservationService.addReservation(reservation);
             } else {
@@ -109,7 +121,6 @@ public class ReservationController {
 
         ModelAndView modelAndView = new ModelAndView("user_reservations");
 
-        List<Reservation> reservations = reservationService.getAllReservations();
 
         Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = "";
@@ -121,20 +132,9 @@ public class ReservationController {
 
         System.out.println(username);
 
-
-
-        if(SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
-            if(!(SecurityContextHolder.getContext().getAuthentication()
-                    instanceof AnonymousAuthenticationToken) ){
-                System.out.println("El usuaio esta logeado");
-            } else {
-                System.out.println("El usuario no esta logeado");
-            }
-        } else {
-            System.out.println("El usuario no esta logeado");
-        }
-
-
+        User usuario = new User();
+        usuario.setUsername(username);
+        List<Reservation> reservations = reservationService.getReservationsByUser(usuario);
 
         modelAndView.addObject("Reservas", reservations);
 
