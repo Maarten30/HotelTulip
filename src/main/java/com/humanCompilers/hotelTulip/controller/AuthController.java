@@ -29,6 +29,13 @@ public class AuthController {
         return modelAndView;
     }
 
+    @GetMapping("/logout")
+    public ModelAndView logout() {
+        ModelAndView modelAndView = new ModelAndView("logout");
+
+        return modelAndView;
+    }
+
     @GetMapping("/registration")
     public ModelAndView showRegistrationForm() {
         ModelAndView modelAndView = new ModelAndView("create_account");
