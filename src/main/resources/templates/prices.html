@@ -130,21 +130,21 @@
             <tbody>
                 <tr>
                     <th scope="row">Pequeña</th>
-                    <td>30€</td>
-                    <td>40€</td>
-                    <td>45€</td>
+                    <td th:if="${high_small != null}" th:text="${high_small.getPrice()} +'€'"></td>
+                    <td th:if="${mid_small != null}" th:text="${mid_small.getPrice()} +'€'"></td>
+                    <td th:if="${low_small != null}" th:text="${low_small.getPrice()} +'€'"></td>
                 </tr>
                 <tr>
                     <th scope="row">Mediana</th>
-                    <td>50€</td>
-                    <td>60€</td>
-                    <td>65€</td>
+                    <td th:if="${high_medium != null}" th:text="${high_medium.getPrice()} +'€'"></td>
+                    <td th:if="${mid_medium != null}" th:text="${mid_medium.getPrice()} +'€'"></td>
+                    <td th:if="${low_medium != null}" th:text="${low_medium.getPrice()} +'€'"></td>
                 </tr>
                 <tr>
                     <th scope="row">Grande</th>
-                    <td>80€</td>
-                    <td>90€</td>
-                    <td>95€</td>
+                    <td th:if="${high_large != null}" th:text="${high_large.getPrice()} +'€'"></td>
+                    <td th:if="${mid_large != null}" th:text="${mid_large.getPrice()} +'€'"></td>
+                    <td th:if="${low_large != null}" th:text="${low_large.getPrice()} +'€'"></td>
                 </tr>
             </tbody>
         </table>

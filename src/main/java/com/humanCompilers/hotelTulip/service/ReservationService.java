@@ -35,7 +35,9 @@ public class ReservationService {
     public List<Reservation> getAllReservations() {
         List<Reservation> reservations =  new ArrayList<>();
         // Parse 'Iterable' to 'List'
-        reservationRepository.findAll().forEach(r -> {
+        Iterable<Reservation> reservas_db = reservationRepository.findAll();
+        System.out.println(reservas_db);
+        reservas_db.forEach(r -> {
             reservations.add(r);
         });
         return reservations;
@@ -44,6 +46,8 @@ public class ReservationService {
     public Reservation getReservationById(UUID id) { return reservationRepository.findById(id).get(); }
 
     public int deleteReservationById(UUID id) { reservationRepository.deleteById(id); return 1; }
+
+    public int deleteAllReservations() { reservationRepository.deleteAll(); return 1; }
 
     // Si hace falta esto se podria descomponer en un metodo por atributo a actualizar
     public int updateReservationById(UUID id, Reservation newReservation) {
@@ -61,6 +65,7 @@ public class ReservationService {
 
     public Double calculateTotalPrice(LocalDate starting_date, LocalDate ending_date, HotelRoom reservedRoom) {
 
+        boolean noErrorsInReservation = true;
         Double totalPrice = 0.0;
         Tarifa tarifa_actual;
         List<Tarifa> tarifas =  tarifaService.getAllTarifas();
@@ -69,12 +74,22 @@ public class ReservationService {
             // Saca la tarifa del dia
             tarifa_actual = tarifaService.calculateHotelRoomTarifa(starting_date, tarifas, reservedRoom);
             // Le suma al precio total, el precio de la tarifa de ese dia
-            if(tarifa_actual != null)
+            if(tarifa_actual != null) {
                 totalPrice += tarifa_actual.getPrice();
+            } else {
+                noErrorsInReservation = false;
+                break;
+            }
+
             // Le suma un dia al starting date, para analizar el siguiente dia
             starting_date = starting_date.plusDays(1);
         }
-        return totalPrice;
+        if(noErrorsInReservation){
+            return totalPrice;
+        } else {
+            return null;
+        }
+
     }
 
     public HotelRoom CheckHotelRoomAvailability(LocalDate checkin, LocalDate checkOut, HotelRoomType hotelRoomType) {

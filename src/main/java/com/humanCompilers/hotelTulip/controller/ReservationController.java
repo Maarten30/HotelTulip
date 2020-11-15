@@ -37,6 +37,9 @@ public class ReservationController {
                                           @RequestParam(value = "checkoutDate", required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkout,
                                           @RequestParam(value = "people", required = true) Integer people) {
 
+        boolean roomsAvailable = true;
+        boolean datesAreValid = true;
+
         HotelRoom available_room = null;
         Reservation reservation = new Reservation();
 
@@ -57,30 +60,42 @@ public class ReservationController {
             reservation.setReservedRoom(available_room);
 
             // Calculate the reservation price
-            double price = reservationService.calculateTotalPrice(
+            Double price = reservationService.calculateTotalPrice(
                     reservation.getCheckinDate(),
                     reservation.getCheckoutDate(),
                     (HotelRoom)reservation.getReservedRoom()
             );
-            // Set the price
-            reservation.setTotalPrice(price);
-            // Set a UUID
-            reservation.setId(UUID.randomUUID());
-            // Save the reservation
-            reservationService.addReservation(reservation);
+            if(price != null) {
+                // Set the price
+                reservation.setTotalPrice(price);
+                // Set a UUID
+                reservation.setId(UUID.randomUUID());
+                // Save the reservation
+                reservationService.addReservation(reservation);
+            } else {
+                datesAreValid = false;
+            }
+        } else {
+            roomsAvailable = false;
         }
 
         // View with result
         ModelAndView modelAndView = new ModelAndView();
 
-        if(available_room != null) {
+        if(roomsAvailable && datesAreValid) {
             System.out.println("Available room = null");
             modelAndView.setViewName("reservation_result");
             modelAndView.addObject("reservation", reservation);
         } else {
-            System.out.println("No disponible");
-            modelAndView.setViewName("reservation");
-            modelAndView.addObject("message", "Sorry! No room for the desired people was available");
+            if(!roomsAvailable) {
+                System.out.println("No disponible");
+                modelAndView.setViewName("reservation");
+                modelAndView.addObject("message", "Sorry! No room for the desired people was available");
+            } else if(!datesAreValid) {
+                modelAndView.setViewName("reservation");
+                modelAndView.addObject("message", "Sorry! Dates out of scope");
+            }
+
         }
 
         return modelAndView;

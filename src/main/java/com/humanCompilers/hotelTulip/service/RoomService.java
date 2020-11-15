@@ -45,6 +45,8 @@ public class RoomService {
         return rooms;
     }
 
+    public int deleteRoomById(UUID id) { roomRepository.deleteById(id); return 1; }
+
     // HOTEL ROOM SERVICE
     public HotelRoom addHotelRoom(HotelRoom room) {
         return hotelRoomRepository.save(room);
@@ -72,6 +74,7 @@ public class RoomService {
 
         return hotelRoomRepository.save(db_hotelRoom);
     }
+    public int deleteAllHotelRooms() { hotelRoomRepository.deleteAll(); return 1; }
 
     // MEETING ROOM SERVICE
     public MeetingRoom addMeetingRoom(MeetingRoom room) {
@@ -101,4 +104,6 @@ public class RoomService {
 
         return meetingRoomRepository.save(db_meetingRoom);
     }
+
+    public int deleteAllMeetingRooms() { meetingRoomRepository.deleteAll(); return 1; }
 }
