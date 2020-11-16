@@ -147,4 +147,8 @@ public class ReservationService {
         return reservations;
 
     }
+
+    public String prueba() {
+        return "Hola";
+    }
 }
