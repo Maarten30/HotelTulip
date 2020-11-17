@@ -1,7 +1,9 @@
 package com.humanCompilers.hotelTulip.service;
 
 import com.humanCompilers.hotelTulip.dao.ReservationRepository;
+import com.humanCompilers.hotelTulip.model.HotelRoom;
 import com.humanCompilers.hotelTulip.model.Reservation;
+import com.humanCompilers.hotelTulip.model.Tarifa;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -71,7 +73,32 @@ class ReservationServiceTest {
     }
 
     @Test
-    void prueba() {
-        assertEquals("Hola", reservationService.prueba());
+    void calculateTotalPrice() {
+
+        Tarifa tarifa = new Tarifa();
+        tarifa.setPrice(120.00);
+        when(tarifaService.calculateHotelRoomTarifa(any(), any())).thenReturn(tarifa);
+
+        Double TotalPrice = reservationService.calculateTotalPrice(LocalDate.of(2020, 12, 13),
+                LocalDate.of(2020, 12, 17), new HotelRoom());
+
+        assertEquals(TotalPrice, 480.0, 0.0);
+
+
+    }
+
+    @Test
+    void calculateTotalPriceInverseDates() {
+
+        Tarifa tarifa = new Tarifa();
+        tarifa.setPrice(120.00);
+        when(tarifaService.calculateHotelRoomTarifa(any(), any())).thenReturn(tarifa);
+
+        Double TotalPrice = reservationService.calculateTotalPrice(LocalDate.of(2020, 12, 17),
+                LocalDate.of(2020, 12, 13), new HotelRoom());
+
+        assertEquals(480.0, TotalPrice, 0.0);
+
+
     }
 }

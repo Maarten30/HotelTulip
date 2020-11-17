@@ -68,11 +68,10 @@ public class ReservationService {
         boolean noErrorsInReservation = true;
         Double totalPrice = 0.0;
         Tarifa tarifa_actual;
-        List<Tarifa> tarifas =  tarifaService.getAllTarifas();
 
         while( starting_date.isBefore(ending_date)){
             // Saca la tarifa del dia
-            tarifa_actual = tarifaService.calculateHotelRoomTarifa(starting_date, tarifas, reservedRoom);
+            tarifa_actual = tarifaService.calculateHotelRoomTarifa(starting_date, reservedRoom);
             // Le suma al precio total, el precio de la tarifa de ese dia
             if(tarifa_actual != null) {
                 totalPrice += tarifa_actual.getPrice();
@@ -80,7 +79,6 @@ public class ReservationService {
                 noErrorsInReservation = false;
                 break;
             }
-
             // Le suma un dia al starting date, para analizar el siguiente dia
             starting_date = starting_date.plusDays(1);
         }
@@ -89,7 +87,6 @@ public class ReservationService {
         } else {
             return null;
         }
-
     }
 
     public HotelRoom CheckHotelRoomAvailability(LocalDate checkin, LocalDate checkOut, HotelRoomType hotelRoomType) {
@@ -148,7 +145,4 @@ public class ReservationService {
 
     }
 
-    public String prueba() {
-        return "Hola";
-    }
 }

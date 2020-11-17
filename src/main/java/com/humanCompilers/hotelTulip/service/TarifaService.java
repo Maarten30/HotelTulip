@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @NoArgsConstructor
@@ -51,8 +52,13 @@ public class TarifaService {
     }
 
 
-    public static Tarifa calculateHotelRoomTarifa(LocalDate date, List<Tarifa> tarifas, HotelRoom room) {
+    public Tarifa calculateHotelRoomTarifa(LocalDate date, HotelRoom room) {
 
+        Iterable<Tarifa> tarifas_db = tarifaRepository.findAll();
+        List<Tarifa> tarifas = new ArrayList<>();
+        tarifas_db.forEach(t-> {
+            tarifas.add(t);
+        });
         // Saca la tarifa, mirando si la fecha esta entre las dos fechas que limitan la tarifa y
         // tambien comparando el tipo de habitacion
         Tarifa tarifa_sacada = tarifas.stream()
