@@ -2,6 +2,7 @@ package com.humanCompilers.hotelTulip.service;
 
 import com.humanCompilers.hotelTulip.dao.ReservationRepository;
 import com.humanCompilers.hotelTulip.model.HotelRoom;
+import com.humanCompilers.hotelTulip.model.HotelRoomType;
 import com.humanCompilers.hotelTulip.model.Reservation;
 import com.humanCompilers.hotelTulip.model.Tarifa;
 import org.junit.jupiter.api.BeforeAll;
@@ -33,6 +34,9 @@ class ReservationServiceTest {
     static Reservation reservation_1;
     static Reservation reservation_2;
 
+    static HotelRoom hotelRoom_1;
+    static HotelRoom hotelRoom_2;
+
 
     // Inicilizas las varibles que vayas a necesitar
     @BeforeAll
@@ -48,6 +52,12 @@ class ReservationServiceTest {
         reservation_2.setCheckinDate(LocalDate.of(2020, 12, 5));
         reservation_2.setCheckoutDate(LocalDate.of(2020, 12, 18));
         reservation_2.setId(UUID.randomUUID());
+
+        hotelRoom_1 = new HotelRoom();
+        hotelRoom_1.setHotelRoomType(HotelRoomType.DOUBLE);
+
+        hotelRoom_2 = new HotelRoom();
+        hotelRoom_2.setHotelRoomType(HotelRoomType.SINGLE);
     }
 
     @Test
@@ -101,4 +111,17 @@ class ReservationServiceTest {
 
 
     }
+
+  /* @Test
+    void CheckHotelRoomAvailability() {
+
+        when(roomService.getAllHotelRooms()).thenReturn(Stream.of(
+                hotelRoom_1, hotelRoom_2
+        ).collect(Collectors.toList()));
+
+        HotelRoom
+
+       assertEquals(480.0, , 0.0);
+
+    }*/
 }
