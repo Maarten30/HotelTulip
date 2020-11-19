@@ -3,6 +3,11 @@ package com.humanCompilers.hotelTulip.service;
 import com.humanCompilers.hotelTulip.dao.ReservationRepository;
 import com.humanCompilers.hotelTulip.dao.UserRepository;
 import com.humanCompilers.hotelTulip.model.User;
+import org.databene.contiperf.PerfTest;
+import org.databene.contiperf.Required;
+import org.databene.contiperf.junit.ContiPerfRule;
+import org.junit.Rule;
+import org.databene.contiperf.report.EmptyReportModule;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,6 +26,9 @@ import static org.mockito.Mockito.when;
 @ExtendWith(SpringExtension.class)
 class UserServiceTest {
 
+    @Rule
+    public ContiPerfRule i = new ContiPerfRule();
+
     static UserService userService;
 
     static UserRepository userRepository = mock((UserRepository.class));
@@ -28,6 +36,7 @@ class UserServiceTest {
 
     static User user_1;
     static User user_2;
+
 
     @BeforeAll
     public static void init(){
@@ -43,9 +52,12 @@ class UserServiceTest {
         user_2.setLastName("Garaizabal");
         user_2.setUsername("gabrigara");
 
+
     }
 
     @Test
+    @PerfTest(invocations = 1000, threads = 20)
+    @Required(max = 1200, average = 250)
     void getAllUsers() {
 
         when(userRepository.findAll()).thenReturn(Stream.of(
@@ -56,6 +68,8 @@ class UserServiceTest {
     }
 
     @Test
+    @PerfTest(invocations = 1000, threads = 20)
+    @Required(max = 1200, average = 250)
     void createUser() {
         when(userRepository.existsById(any())).thenReturn(false);
         when(userRepository.save(user_1)).thenReturn(user_1);
@@ -65,10 +79,13 @@ class UserServiceTest {
     }
 
     @Test
+    @PerfTest(invocations = 1000, threads = 20)
+    @Required(max = 1200, average = 250)
     void createUserNull() {
         when(userRepository.existsById(any())).thenReturn(true);
 
         assertEquals(null, userService.createUser(user_1));
     }
     //Faltaría el caso en que devuelve false y se crea el usuario
+
 }
