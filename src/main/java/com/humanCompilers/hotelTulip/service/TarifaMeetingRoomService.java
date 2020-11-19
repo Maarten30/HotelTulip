@@ -2,6 +2,7 @@ package com.humanCompilers.hotelTulip.service;
 
 import com.humanCompilers.hotelTulip.dao.TarifaMeetingRoomRepository;
 import com.humanCompilers.hotelTulip.model.MeetingRoom;
+import com.humanCompilers.hotelTulip.model.Tarifa;
 import com.humanCompilers.hotelTulip.model.TarifaMeetingRoom;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,6 @@ public class TarifaMeetingRoomService {
         });
         return tarifas;
     }
-
     public int deleteTarifaMeetingRoomById(Integer id) { tarifaMeetingRoomRepository.deleteById(id); return 1;}
 
     public int deleteAllTarifasMeetingRoom() { tarifaMeetingRoomRepository.deleteAll(); return 1; }
@@ -52,8 +52,15 @@ public class TarifaMeetingRoomService {
     }
 
 
-    public static TarifaMeetingRoom calculateHotelRoomTarifa(LocalDate date, List<TarifaMeetingRoom> tarifas, MeetingRoom room) {
+    public TarifaMeetingRoom calculateMeetingRoomTarifa(LocalDate date, MeetingRoom room) {
 
+        // Saca la tarifa, mirando si la fecha esta entre las dos fechas que limitan la tarifa y
+        // tambien comparando el tipo de habitacion
+        Iterable<TarifaMeetingRoom> tarifas_db = tarifaMeetingRoomRepository.findAll(); // Convertir a List
+        List<TarifaMeetingRoom> tarifas = new ArrayList<>();
+        tarifas_db.forEach(t-> {
+            tarifas.add(t);
+        });
         // Saca la tarifa, mirando si la fecha esta entre las dos fechas que limitan la tarifa y
         // tambien comparando el tipo de habitacion
         TarifaMeetingRoom tarifa_sacada = tarifas.stream()

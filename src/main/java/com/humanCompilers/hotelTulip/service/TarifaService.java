@@ -1,5 +1,6 @@
 package com.humanCompilers.hotelTulip.service;
 
+import com.humanCompilers.hotelTulip.dao.TarifaMeetingRoomRepository;
 import com.humanCompilers.hotelTulip.dao.TarifaRepository;
 import com.humanCompilers.hotelTulip.model.*;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 public class TarifaService {
 
     private TarifaRepository tarifaRepository;
+    private TarifaMeetingRoomRepository tarifaMeetingRoomRepository;
 
     @Autowired
     public TarifaService(TarifaRepository tarifaRepository) {
@@ -35,6 +37,7 @@ public class TarifaService {
         });
         return tarifas;
     }
+
 
     public int deleteTarifa(Integer id) { tarifaRepository.deleteById(id); return 1;}
 
@@ -79,5 +82,4 @@ public class TarifaService {
         }
         return tarifa_sacada;
     }
-
 }

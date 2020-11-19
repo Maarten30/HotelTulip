@@ -4,13 +4,13 @@ $(document).ready(function() {
         if($(this).attr('id') == 'inlineRadio2') {
             $('#salas').show();
             $('#habitaciones').hide();
-            $('#reservationForm').attr('action','reservations/newMeetingRoomReservation');
+            $('#reservationForm').attr('action','newMeetingRoomReservation');
         }
         else
         {
             $('#salas').hide();
             $('#habitaciones').show();
-            $('#reservationForm').attr('action','reservations/newReservation');
+            $('#reservationForm').attr('action','newReservation');
         }
     });
 });

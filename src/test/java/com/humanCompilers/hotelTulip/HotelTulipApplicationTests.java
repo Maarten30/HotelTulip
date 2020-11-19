@@ -15,16 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /*@SpringBootTest
 class HotelTulipApplicationTests {
 
-   @Test
-    public void testApp() {
-        final TarifaService autentia = new TarifaService();
-        autentia.tellMeSometing(3);
-        autentia.tellMeSometing(6);
 
-        //Uncomment the following line to get 100% coverage
-        autentia.tellMeSometing(7);
-
-    }
 
 
 }*/

@@ -111,6 +111,87 @@ public class ReservationController {
         return modelAndView;
     }
 
+    @PostMapping("/newMeetingRoomReservation")
+    public ModelAndView createMeetingRoomReservation(@RequestParam(value = "checkinDate", required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkin,
+                                          @RequestParam(value = "checkoutDate", required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkout,
+                                          @RequestParam(value = "sala", required = true) Integer people) {
+
+        boolean roomsAvailable = true;
+        boolean datesAreValid = true;
+
+        MeetingRoom available_room = null;
+        Reservation reservation = new Reservation();
+
+        if(people == 10) {
+            available_room = reservationService.CheckMeetingRoomAvailability(checkin, checkout, MeetingRoomType.SMALL);
+            System.out.println(available_room);
+        } else if(people == 20) {
+            available_room = reservationService.CheckMeetingRoomAvailability(checkin, checkout, MeetingRoomType.MEDIUM);
+        } else {
+            available_room = reservationService.CheckMeetingRoomAvailability(checkin, checkout, MeetingRoomType.LARGE);
+        }
+
+        if(available_room != null) {
+
+
+            // Set checkin, checkout and room
+            reservation.setCheckinDate(checkin);
+            reservation.setCheckoutDate(checkout);
+            reservation.setReservedRoom(available_room);
+
+
+            // Calculate the reservation price
+            Double price = reservationService.calculateMeetingRoomTotalPrice(
+                    reservation.getCheckinDate(),
+                    reservation.getCheckoutDate(),
+                    (MeetingRoom)reservation.getReservedRoom()
+            );
+
+            if(price != null) {
+                // Set the price
+                reservation.setTotalPrice(price);
+                //Set a User
+                Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                User usuario = null;
+
+                if(user instanceof UserDetails){
+                    String username = ((UserDetails)user).getUsername(); // Si no hay usuario logeado será anonymous
+                    usuario = (User) userService.loadUserByUsername(username);
+                }
+                reservation.setUser(usuario);
+                // Save the reservation
+                reservationService.addReservation(reservation);
+            } else {
+                datesAreValid = false;
+            }
+        } else {
+            roomsAvailable = false;
+        }
+
+        // View with result
+        ModelAndView modelAndView = new ModelAndView();
+
+        if(roomsAvailable && datesAreValid) {
+            System.out.println("Available room = null");
+            modelAndView.setViewName("reservation_result");
+            modelAndView.addObject("reservation", reservation);
+        } else {
+            if(!roomsAvailable) {
+                System.out.println("No disponible");
+                modelAndView.setViewName("reservation");
+                modelAndView.addObject("message", "Sorry! No room for the desired people was available");
+            } else if(!datesAreValid) {
+                modelAndView.setViewName("reservation");
+                modelAndView.addObject("message", "Sorry! Dates out of scope");
+            }
+
+        }
+
+        return modelAndView;
+    }
+
+
+
     @GetMapping("/confirmation")
     public ModelAndView confirmation() {
         return new ModelAndView("reservation_result");

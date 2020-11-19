@@ -1,10 +1,7 @@
 package com.humanCompilers.hotelTulip.service;
 
 import com.humanCompilers.hotelTulip.dao.ReservationRepository;
-import com.humanCompilers.hotelTulip.model.HotelRoom;
-import com.humanCompilers.hotelTulip.model.HotelRoomType;
-import com.humanCompilers.hotelTulip.model.Reservation;
-import com.humanCompilers.hotelTulip.model.Tarifa;
+import com.humanCompilers.hotelTulip.model.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,6 +26,7 @@ class ReservationServiceTest {
     // Con el 'mock' simulas la creacion de las clases que no quieres usar pero que necesitas para hacer new de ReservationService
     static ReservationRepository reservationRepository = mock((ReservationRepository.class));
     static TarifaService tarifaService = mock(TarifaService.class);
+    static TarifaMeetingRoomService tarifaMeetingRoomService = mock(TarifaMeetingRoomService.class);
     static RoomService roomService = mock(RoomService.class);
 
     static Reservation reservation_1;
@@ -41,7 +39,7 @@ class ReservationServiceTest {
     // Inicilizas las varibles que vayas a necesitar
     @BeforeAll
     public static void init(){
-        reservationService = new ReservationService(tarifaService, roomService, reservationRepository);
+        reservationService = new ReservationService(tarifaService, tarifaMeetingRoomService, roomService, reservationRepository);
 
         reservation_1 = new Reservation();
         reservation_1.setCheckinDate(LocalDate.of(2020, 11, 17));
@@ -97,7 +95,7 @@ class ReservationServiceTest {
 
     }
 
-    @Test
+    /*@Test
     void calculateTotalPriceInverseDates() {
 
         Tarifa tarifa = new Tarifa();
@@ -110,6 +108,18 @@ class ReservationServiceTest {
         assertEquals(480.0, TotalPrice, 0.0);
 
 
+    }*/
+
+    @Test
+    void calculateMeetingRoomTotalPrice() {
+        TarifaMeetingRoom  tarifa = new TarifaMeetingRoom();
+        tarifa.setPrice(120.00);
+        when(tarifaMeetingRoomService.calculateMeetingRoomTarifa(any(), any())).thenReturn(tarifa);
+
+        Double TotalPrice = reservationService.calculateMeetingRoomTotalPrice(LocalDate.of(2020, 12, 13),
+                LocalDate.of(2020, 12, 17), new MeetingRoom());
+
+        assertEquals(TotalPrice, 480.0, 0.0);
     }
 
   /* @Test

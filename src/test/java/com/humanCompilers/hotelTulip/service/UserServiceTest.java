@@ -14,6 +14,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -23,7 +24,7 @@ class UserServiceTest {
     static UserService userService;
 
     static UserRepository userRepository = mock((UserRepository.class));
-    static PasswordEncoder passwordEncoder;
+    static PasswordEncoder passwordEncoder = mock(PasswordEncoder.class);
 
     static User user_1;
     static User user_2;
@@ -37,7 +38,7 @@ class UserServiceTest {
         user_1.setLastName("Aranzabal");
         user_1.setUsername("luisaran");
 
-        user_2= new User();
+        user_2 = new User();
         user_2.setFirstName("Gabri");
         user_2.setLastName("Garaizabal");
         user_2.setUsername("gabrigara");
@@ -52,6 +53,15 @@ class UserServiceTest {
         ).collect(Collectors.toList()));
 
         assertEquals(2, userService.getAllUsers().size());
+    }
+
+    @Test
+    void createUser() {
+        when(userRepository.existsById(any())).thenReturn(false);
+        when(userRepository.save(user_1)).thenReturn(user_1);
+        when(passwordEncoder.encode(anyString())).thenReturn(anyString());
+        User usuario_prueba = userService.createUser(user_1);
+        assertEquals(user_1, usuario_prueba);
     }
 
     @Test

@@ -16,13 +16,16 @@ public class ReservationService {
 
     private final ReservationRepository reservationRepository;
     private final TarifaService tarifaService;
+    private final TarifaMeetingRoomService tarifaMeetingRoomService;
     private final RoomService roomService;
 
     @Autowired
     public ReservationService(TarifaService tarifaService,
+                              TarifaMeetingRoomService tarifaMeetingRoomService,
                               RoomService roomService,
                               ReservationRepository reservationRepository) {
         this.tarifaService = tarifaService;
+        this.tarifaMeetingRoomService = tarifaMeetingRoomService;
         this.roomService = roomService;
         this.reservationRepository = reservationRepository;
     }
@@ -89,6 +92,35 @@ public class ReservationService {
         }
     }
 
+    public Double calculateMeetingRoomTotalPrice(LocalDate starting_date, LocalDate ending_date, MeetingRoom reservedRoom) {
+
+        boolean noErrorsInReservation = true;
+        Double totalPrice = 0.0;
+        TarifaMeetingRoom tarifa_actual;
+        List<TarifaMeetingRoom> tarifas =  tarifaMeetingRoomService.getAllTarifasMeetingRoom();
+
+        while( starting_date.isBefore(ending_date)){
+            // Saca la tarifa del dia
+            tarifa_actual = tarifaMeetingRoomService.calculateMeetingRoomTarifa(starting_date, reservedRoom);
+            // Le suma al precio total, el precio de la tarifa de ese dia
+            if(tarifa_actual != null) {
+                totalPrice += tarifa_actual.getPrice();
+            } else {
+                noErrorsInReservation = false;
+                break;
+            }
+
+            // Le suma un dia al starting date, para analizar el siguiente dia
+            starting_date = starting_date.plusDays(1);
+        }
+        if(noErrorsInReservation){
+            return totalPrice;
+        } else {
+            return null;
+        }
+
+    }
+
     public HotelRoom CheckHotelRoomAvailability(LocalDate checkin, LocalDate checkOut, HotelRoomType hotelRoomType) {
 
         List<HotelRoom> rooms = roomService.getAllHotelRooms();
@@ -133,6 +165,53 @@ public class ReservationService {
             }
         }
 
+
+        return freeRoom;
+    }
+
+    public MeetingRoom CheckMeetingRoomAvailability(LocalDate checkin, LocalDate checkOut, MeetingRoomType meetingRoomType) {
+
+        List<MeetingRoom> rooms = roomService.getAllMeetingRooms();
+        System.out.println(rooms);
+        List<Reservation> reservations = getAllReservations();
+        System.out.println(reservations);
+        MeetingRoom freeRoom = null;
+
+        List<MeetingRoom> rooms_cloned = new ArrayList<>();
+        rooms.forEach(room -> {
+            MeetingRoom aux_room = new MeetingRoom();
+            aux_room.setId(room.getId());
+            aux_room.setMeetingRoomType(room.getMeetingRoomType());
+            rooms_cloned.add(aux_room);
+        });
+
+        rooms_cloned.removeIf(r -> r.getMeetingRoomType() != meetingRoomType);
+
+        if (rooms_cloned.size() > 0) {
+            if(reservations.size() > 0) {
+                for (MeetingRoom room:rooms_cloned) {
+                    boolean occupied = false;
+                    UUID id = room.getId();
+
+                    for (Reservation reservation:reservations) {
+                        if(reservation.getReservedRoom().getId().equals(id))
+                            if(!(checkin.isAfter(reservation.getCheckoutDate()) ||
+                                    checkOut.isBefore(reservation.getCheckinDate()))){
+                                occupied = true;
+                            } else {
+                                occupied = false;
+                                break;
+                            }
+                    }
+                    if(!occupied) {
+                        freeRoom = room;
+                        break;
+                    }
+                }
+            } else {
+                freeRoom = rooms_cloned.stream().findFirst().orElse(null);
+            }
+        }
 
         return freeRoom;
     }
