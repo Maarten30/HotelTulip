@@ -86,6 +86,13 @@ class UserServiceTest {
 
         assertEquals(null, userService.createUser(user_1));
     }
-    //Faltaría el caso en que devuelve false y se crea el usuario
 
+    /*@Test
+    @PerfTest(invocations = 1000, threads = 20)
+    @Required(max = 1200, average = 250)
+    void loadUserByUsername() {
+        when(userRepository.findById(any())).thenReturn(user_1);
+
+        assertEquals(userService.loadUserByUsername(user_1.getUsername()), user_1.getUsername());
+    }*/
 }

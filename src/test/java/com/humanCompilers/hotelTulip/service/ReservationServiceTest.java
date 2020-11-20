@@ -55,7 +55,7 @@ class ReservationServiceTest {
         hotelRoom_1.setHotelRoomType(HotelRoomType.DOUBLE);
 
         hotelRoom_2 = new HotelRoom();
-        hotelRoom_2.setHotelRoomType(HotelRoomType.SINGLE);
+        hotelRoom_2.setHotelRoomType(HotelRoomType.DOUBLE);
     }
 
     @Test
@@ -122,16 +122,21 @@ class ReservationServiceTest {
         assertEquals(TotalPrice, 480.0, 0.0);
     }
 
-  /* @Test
+    /*@Test
     void CheckHotelRoomAvailability() {
 
         when(roomService.getAllHotelRooms()).thenReturn(Stream.of(
                 hotelRoom_1, hotelRoom_2
         ).collect(Collectors.toList()));
 
-        HotelRoom
+        when(reservationService.getAllReservations()).thenReturn(Stream.of(
+                reservation_1, reservation_2
+        ).collect(Collectors.toList()));
 
-       assertEquals(480.0, , 0.0);
+        HotelRoom hotelRoom = reservationService.CheckHotelRoomAvailability(LocalDate.of(2020, 12, 2),
+                LocalDate.of(2020, 12, 4), HotelRoomType.DOUBLE);
+
+       assertEquals(hotelRoom_1, hotelRoom );
 
     }*/
 }

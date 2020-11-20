@@ -2,10 +2,7 @@ package com.humanCompilers.hotelTulip.service;
 
 import com.humanCompilers.hotelTulip.dao.ReservationRepository;
 import com.humanCompilers.hotelTulip.dao.TarifaRepository;
-import com.humanCompilers.hotelTulip.model.HotelRoomType;
-import com.humanCompilers.hotelTulip.model.Reservation;
-import com.humanCompilers.hotelTulip.model.Season;
-import com.humanCompilers.hotelTulip.model.Tarifa;
+import com.humanCompilers.hotelTulip.model.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,6 +30,8 @@ class TarifaServiceTest {
     static Tarifa tarifa_1;
     static Tarifa tarifa_2;
 
+    static HotelRoom room;
+
 
     @BeforeAll
     public static void init() {
@@ -51,6 +50,9 @@ class TarifaServiceTest {
         tarifa_2.setPrice(250.0);
         tarifa_2.setRoom_type(HotelRoomType.SINGLE);
         tarifa_2.setSeason(Season.HIGH);
+
+        room = new HotelRoom();
+        room.setHotelRoomType(HotelRoomType.DOUBLE);
     }
 
     @Test
@@ -72,5 +74,17 @@ class TarifaServiceTest {
         LocalDate fecha = tarifa.getStarting_date();
 
         assertEquals(tarifa_1.getStarting_date(), fecha);
+    }
+
+    @Test
+    void calculateHotelRoomTarifa() {
+        when(tarifaRepository.findAll()).thenReturn(Stream.of(
+                tarifa_1, tarifa_2
+        ).collect(Collectors.toList()));
+
+        Tarifa tarifResult = tarifaService.calculateHotelRoomTarifa(LocalDate.of
+                (2021, 9, 22), room);
+
+        assertEquals(tarifa_1,tarifResult);
     }
 }

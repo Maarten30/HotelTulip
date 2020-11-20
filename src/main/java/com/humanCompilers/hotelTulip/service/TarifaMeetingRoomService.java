@@ -54,15 +54,13 @@ public class TarifaMeetingRoomService {
 
     public TarifaMeetingRoom calculateMeetingRoomTarifa(LocalDate date, MeetingRoom room) {
 
-        // Saca la tarifa, mirando si la fecha esta entre las dos fechas que limitan la tarifa y
-        // tambien comparando el tipo de habitacion
         Iterable<TarifaMeetingRoom> tarifas_db = tarifaMeetingRoomRepository.findAll(); // Convertir a List
         List<TarifaMeetingRoom> tarifas = new ArrayList<>();
         tarifas_db.forEach(t-> {
             tarifas.add(t);
         });
         // Saca la tarifa, mirando si la fecha esta entre las dos fechas que limitan la tarifa y
-        // tambien comparando el tipo de habitacion
+        // tambien comparando el tipo de sala
         TarifaMeetingRoom tarifa_sacada = tarifas.stream()
                 .filter(t -> date.isAfter(t.getStarting_date()) &&
                         date.isBefore(t.getEnding_date())&&
