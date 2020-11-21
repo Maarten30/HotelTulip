@@ -1,0 +1,10 @@
+languaje: java
+os: windows
+jdk:
+  - javac 1.8.0_241
+script:
+  - mvn test
+branches:
+  only:
+    - sprint2
+
