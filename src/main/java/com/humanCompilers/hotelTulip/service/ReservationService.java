@@ -72,6 +72,8 @@ public class ReservationService {
         Double totalPrice = 0.0;
         Tarifa tarifa_actual;
 
+        if(starting_date.isAfter(ending_date)) return null;
+
         while( starting_date.isBefore(ending_date)){
             // Saca la tarifa del dia
             tarifa_actual = tarifaService.calculateHotelRoomTarifa(starting_date, reservedRoom);
@@ -123,10 +125,10 @@ public class ReservationService {
 
     public HotelRoom CheckHotelRoomAvailability(LocalDate checkin, LocalDate checkOut, HotelRoomType hotelRoomType) {
 
+        // Se podría mejorar cogiendo solo las habitaciones del tipo buscado
         List<HotelRoom> rooms = roomService.getAllHotelRooms();
-        System.out.println(rooms);
         List<Reservation> reservations = getAllReservations();
-        System.out.println(reservations);
+
         HotelRoom freeRoom = null;
 
         List<HotelRoom> rooms_cloned = new ArrayList<>();
@@ -156,11 +158,11 @@ public class ReservationService {
                             }
                     }
                     if(!occupied) {
-                        freeRoom = room;
-                        break;
+                        return room;
                     }
                 }
             } else {
+                // Revisar este 'else'
                 freeRoom = rooms_cloned.stream().findFirst().orElse(null);
             }
         }

@@ -36,26 +36,33 @@ class ReservationServiceTest {
     static HotelRoom hotelRoom_2;
 
 
-    // Inicilizas las varibles que vayas a necesitar
+    // Inicializas las varibles que vayas a necesitar
     @BeforeAll
     public static void init(){
+        // Reservation Service
         reservationService = new ReservationService(tarifaService, tarifaMeetingRoomService, roomService, reservationRepository);
 
+        // Room 1
+        hotelRoom_1 = new HotelRoom();
+        hotelRoom_1.setHotelRoomType(HotelRoomType.SINGLE);
+        hotelRoom_1.setId(UUID.randomUUID());
+        // Room 2
+        hotelRoom_2 = new HotelRoom();
+        hotelRoom_2.setHotelRoomType(HotelRoomType.DOUBLE);
+        hotelRoom_2.setId(UUID.randomUUID());
+
+        // Reservation 1
         reservation_1 = new Reservation();
         reservation_1.setCheckinDate(LocalDate.of(2020, 11, 17));
         reservation_1.setCheckoutDate(LocalDate.of(2020, 11, 30));
+        reservation_1.setReservedRoom(hotelRoom_1);
         reservation_1.setId(UUID.randomUUID());
-
+        // Reservation 2
         reservation_2 = new Reservation();
         reservation_2.setCheckinDate(LocalDate.of(2020, 12, 5));
         reservation_2.setCheckoutDate(LocalDate.of(2020, 12, 18));
+        reservation_2.setReservedRoom(hotelRoom_2);
         reservation_2.setId(UUID.randomUUID());
-
-        hotelRoom_1 = new HotelRoom();
-        hotelRoom_1.setHotelRoomType(HotelRoomType.DOUBLE);
-
-        hotelRoom_2 = new HotelRoom();
-        hotelRoom_2.setHotelRoomType(HotelRoomType.DOUBLE);
     }
 
     @Test
@@ -91,11 +98,9 @@ class ReservationServiceTest {
                 LocalDate.of(2020, 12, 17), new HotelRoom());
 
         assertEquals(TotalPrice, 480.0, 0.0);
-
-
     }
 
-    /*@Test
+    @Test
     void calculateTotalPriceInverseDates() {
 
         Tarifa tarifa = new Tarifa();
@@ -105,10 +110,8 @@ class ReservationServiceTest {
         Double TotalPrice = reservationService.calculateTotalPrice(LocalDate.of(2020, 12, 17),
                 LocalDate.of(2020, 12, 13), new HotelRoom());
 
-        assertEquals(480.0, TotalPrice, 0.0);
-
-
-    }*/
+        assertEquals(null, TotalPrice);
+    }
 
     @Test
     void calculateMeetingRoomTotalPrice() {
@@ -119,10 +122,10 @@ class ReservationServiceTest {
         Double TotalPrice = reservationService.calculateMeetingRoomTotalPrice(LocalDate.of(2020, 12, 13),
                 LocalDate.of(2020, 12, 17), new MeetingRoom());
 
-        assertEquals(TotalPrice, 480.0, 0.0);
+        assertEquals( 480.0, TotalPrice, 0.0);
     }
 
-    /*@Test
+    @Test
     void CheckHotelRoomAvailability() {
 
         when(roomService.getAllHotelRooms()).thenReturn(Stream.of(
@@ -136,7 +139,7 @@ class ReservationServiceTest {
         HotelRoom hotelRoom = reservationService.CheckHotelRoomAvailability(LocalDate.of(2020, 12, 2),
                 LocalDate.of(2020, 12, 4), HotelRoomType.DOUBLE);
 
-       assertEquals(hotelRoom_1, hotelRoom );
+       assertEquals(hotelRoom_2.getId(), hotelRoom.getId());
 
-    }*/
+    }
 }
