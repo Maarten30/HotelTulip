@@ -230,7 +230,19 @@ public class ReservationController {
 
         reservationService.deleteReservationById(id);
 
-        List<Reservation> reservations = reservationService.getAllReservations();
+        Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = "";
+        if(user instanceof UserDetails){
+            username = ((UserDetails)user).getUsername();
+        } else {
+            username = user.toString();
+        }
+
+        System.out.println(username);
+
+        User usuario = new User();
+        usuario.setUsername(username);
+        List<Reservation> reservations = reservationService.getReservationsByUser(usuario);
 
         ModelAndView modelAndView = new ModelAndView("user_reservations");
         modelAndView.addObject("Reservas", reservations);

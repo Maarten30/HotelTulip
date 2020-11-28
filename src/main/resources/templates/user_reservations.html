@@ -48,7 +48,8 @@
             </div>
             <h7 class="mb-1 infoRes" th:text="'Fecha entrada: ' + ${reserva.getCheckinDate()}"> </h7>
             <h7 class="mb-1 infoRes" th:text="'Fecha salida: ' + ${reserva.getCheckoutDate()}">  </h7>
-            <h7 class="mb-1 infoRes" th:text="'Tipo de habitación: ' + ${reserva.getReservedRoom().getId()}"> </h7>
+            <h7 class="mb-1 infoRes" th:if="${reserva.getReservedRoom() instanceof T(com.humanCompilers.hotelTulip.model.HotelRoom)}" th:text="'Tipo de habitación: ' + ${reserva.getReservedRoom().getHotelRoomType()}"> </h7>
+            <h7 class="mb-1 infoRes" th:unless="${reserva.getReservedRoom() instanceof T(com.humanCompilers.hotelTulip.model.HotelRoom)}" th:text="'Tipo de Sala: ' + ${reserva.getReservedRoom().getMeetingRoomType()}"> </h7>
         </li>
     </div>
 
