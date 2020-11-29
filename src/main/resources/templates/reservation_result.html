@@ -37,8 +37,8 @@
                         <ul th:text="'Id_reserva: ' + ${reservation.getId()}"> </ul>
                         <ul th:text="'Fecha entrada: ' + ${reservation.getCheckinDate()}"> </ul>
                         <ul th:text="'Fecha salida: ' + ${reservation.getCheckoutDate()}"> </ul>
-                        <!-- Hay que ver como solucionar esta linea comentada -->
-                        <!-- <ul th:text="'Habitación/Sala reservada: ' + ${reservation.getReservedRoom().getType()}"> </ul>-->
+                        <ul th:if="${reservation.getReservedRoom() instanceof T(com.humanCompilers.hotelTulip.model.HotelRoom)}" th:text="'Tipo de habitación: ' + ${reservation.getReservedRoom().getHotelRoomType()}"> </ul>
+                        <ul th:unless="${reservation.getReservedRoom() instanceof T(com.humanCompilers.hotelTulip.model.HotelRoom)}" th:text="'Tipo de Sala: ' + ${reservation.getReservedRoom().getMeetingRoomType()}"> </ul>
                         <ul th:text="'Precio Total (IVA incluido): ' + ${reservation.getTotalPrice()} + '€'"> </ul>
                         <a th:href="@{/reservations/newReservation}">Submit another Reservation</a>
                     </div>
