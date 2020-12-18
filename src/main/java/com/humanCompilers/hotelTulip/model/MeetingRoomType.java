@@ -1,5 +1,9 @@
 package com.humanCompilers.hotelTulip.model;
 
+/**
+ * Clase que representa un tipo de sala dentro de la aplicación
+ * @author HumanCompilers
+ */
 public enum MeetingRoomType {
 
     SMALL("SMALL"),
@@ -8,6 +12,10 @@ public enum MeetingRoomType {
 
     private final String meetingRoomType;
 
+    /**
+     * Constructor de la clase
+     * @param meetingRoomType nombre del tipo de sala
+     */
     MeetingRoomType(String meetingRoomType) {
         this.meetingRoomType = meetingRoomType;
     }

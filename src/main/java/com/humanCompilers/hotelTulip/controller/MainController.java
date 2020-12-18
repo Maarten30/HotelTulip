@@ -15,6 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.*;
 
+/**
+ * Clase que responde a las peticiones http generales de la aplicación
+ * @author HumanCompilers
+ */
 @Controller
 public class MainController {
 
@@ -23,7 +27,14 @@ public class MainController {
     private final TarifaService tarifaService;
     private final TarifaMeetingRoomService tarifaMeetingRoomService;
 
-
+    /**
+     *
+     * @param reservationService Instancia de la clase reservationService para poder hacerle llamadas
+     * @param roomService Instancia de la clase roomService para poder hacerle llamadas
+     * @param tarifaService Instancia de la clase tarifaService para poder hacerle llamadas
+     * @param userService Instancia de la clase userService para poder hacerle llamadas
+     * @param tarifaMeetingRoomService Instancia de la clase tarifaMeetingRoomService para poder hacerle llamadas
+     */
     @Autowired
     public MainController(ReservationService reservationService, RoomService roomService,
                           TarifaService tarifaService, UserService userService,
@@ -34,6 +45,10 @@ public class MainController {
         this.tarifaMeetingRoomService = tarifaMeetingRoomService;
      }
 
+    /**
+     * Método al que se le llama al realizar una petición Get con la url de /
+     * @return Devuelve la vista de la página principal de la aplicación
+     */
     @GetMapping("/")
     public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView("index");
@@ -41,6 +56,10 @@ public class MainController {
         return modelAndView;
     }
 
+    /**
+     * Método al que se le llama al realizar una petición Get con la url de /tarifas
+     * @return Devuelve la vista de las tarifas existentes en el hotel
+     */
     @GetMapping("/tarifas")
     public ModelAndView tarifas() {
 
@@ -72,16 +91,28 @@ public class MainController {
         return modelAndView;
     }
 
+    /**
+     * Método al que se le llama al realizar una petición Get con la url de /contact
+     * @return Devuelve la vista del contacto con el hotel
+     */
     @GetMapping("/contact")
     public ModelAndView contact() {
         return new ModelAndView("contact");
     }
 
+    /**
+     * Método al que se le llama al realizar una petición Get con la url de /cookies
+     * @return Devuelve la vista de las políticas de privacidad del hotel
+     */
     @GetMapping("/privacyPolicy")
     public ModelAndView cookies() {
         return new ModelAndView("cookies");
     }
 
+    /**
+     * Atributo general para saber quién es el usuario logeado
+     * @return devuelve el usuario logeado en la aplicación en ese momento
+     */
     @ModelAttribute("loggedinUser")
     public User globalUserObject(Model model) {
 

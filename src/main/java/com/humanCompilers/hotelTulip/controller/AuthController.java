@@ -10,17 +10,29 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+/**
+ * Clase que responde a las peticiones http relativas al usuario
+ * @author HumanCompilers
+ */
 @Controller
 @RequestMapping("user")
 public class AuthController {
 
     private final UserService userService;
 
+    /**
+     * Constructor de la clase
+     * @param userService Instancia de la clase userService para poder hacerle llamadas
+     */
     @Autowired
     public AuthController(UserService userService) {
         this.userService = userService;
     }
 
+    /**
+     * Método al que se le llama al realizar una petición Get con la url de /login
+     * @return Devuelve la vista correspondiente al inicio de sesión
+     */
     @GetMapping("/login")
     public ModelAndView login() {
 
@@ -29,6 +41,10 @@ public class AuthController {
         return modelAndView;
     }
 
+    /**
+     * Método al que se le llama al realizar una petición Get con la url de /logout
+     * @return Devuelve la vista correspondiente a cerrar sesión
+     */
     @GetMapping("/logout")
     public ModelAndView logout() {
         ModelAndView modelAndView = new ModelAndView("logout");
@@ -36,6 +52,10 @@ public class AuthController {
         return modelAndView;
     }
 
+    /**
+     * Método al que se le llama al realizar una petición Get con la url de /registration
+     * @return Devuelve la vista correspondiente a la creación de cuenta
+     */
     @GetMapping("/registration")
     public ModelAndView showRegistrationForm() {
         ModelAndView modelAndView = new ModelAndView("create_account");
@@ -44,6 +64,12 @@ public class AuthController {
         return modelAndView;
     }
 
+    /**
+     * Método al que se le llama al realizar una petición Post con la url de /registration
+     * @param newUser Nuevo usuario creado en la aplicación
+     * @return Si el email introducido por el usuario no existe en la aplicación, se devolverá la vista de inicio de
+     * sesión, sin embargo, en caso de repetir el email, aparecerá una alerta por pantalla con dicha indicación
+     */
     @PostMapping("/registration")
     public ModelAndView createUser(@ModelAttribute User newUser) {
 

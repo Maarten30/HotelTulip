@@ -17,6 +17,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Clase que responde a las peticiones http relativas a las reservas
+ * @author HumanCompilers
+ */
 @Controller
 @RequestMapping("reservations")
 public class ReservationController {
@@ -24,17 +28,35 @@ public class ReservationController {
     private final ReservationService reservationService;
     private final UserService userService;
 
+    /**
+     * Constructor de la clase
+     * @param reservationService Instancia de la clase reservationService para poder hacerle llamadas
+     * @param userService Instancia de la clase userService para poder hacerle llamadas
+     */
     @Autowired
     public ReservationController(ReservationService reservationService, UserService userService) {
         this.reservationService = reservationService;
         this.userService = userService;
     }
 
+    /**
+     * Método al que se le llama al realizar una petición Get con la url de /newReservation
+     * @return Devuelve la vista para poder realizar una reserva
+     */
     @GetMapping("/newReservation")
     public ModelAndView reservations() {
         return new ModelAndView("reservation");
     }
 
+    /**
+     * Método al que se le llama al realizar una petición Post con la url de /newReservation
+     * @param checkin Fecha de inicio de la reserva
+     * @param checkout Fecha de finalización de la reserva
+     * @param people Número de personas dentro de la reserva
+     * @return En el caso de haber disponibilidad para las fechas sugeridas, el método devolverá la vista con los detalles
+     * de la reserva. Sin embargo, en caso de no haber disponibilidad devolverá la misma vista de realizar reserva
+     * pero con una alerta.
+     */
     @PostMapping("/newReservation")
     public ModelAndView createReservation(@RequestParam(value = "checkinDate", required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkin,
                                           @RequestParam(value = "checkoutDate", required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkout,
@@ -111,6 +133,15 @@ public class ReservationController {
         return modelAndView;
     }
 
+    /**
+     * Método al que se le llama al realizar una petición Post con la url de /newMeetingRoomReservation
+     * @param checkin Fecha de inicio de la reserva
+     * @param checkout Fecha de finalización de la reserva
+     * @param people Número de personas dentro de la reserva
+     * @return En el caso de haber disponibilidad para las fechas sugeridas, el método devolverá la vista con los detalles
+     * de la reserva. Sin embargo, en caso de no haber disponibilidad devolverá la misma vista de realizar reserva
+     * pero con una alerta.
+     */
     @PostMapping("/newMeetingRoomReservation")
     public ModelAndView createMeetingRoomReservation(@RequestParam(value = "checkinDate", required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkin,
                                           @RequestParam(value = "checkoutDate", required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkout,
@@ -190,13 +221,19 @@ public class ReservationController {
         return modelAndView;
     }
 
-
-
+    /**
+     * Método al que se le llama al realizar una petición Get con la url de /confirmation
+     * @return Devuelve la vista con la confirmación de la reserva y los detalles de esta
+     */
     @GetMapping("/confirmation")
     public ModelAndView confirmation() {
         return new ModelAndView("reservation_result");
     }
 
+    /**
+     * Método al que se le llama al realizar una petición Get con la url de /myReservations
+     * @return Devuelve la vista con las reservas pertenecientes al usuario logeado.
+     */
     @GetMapping("/myReservations")
     public ModelAndView userBookings() {
 
@@ -222,11 +259,13 @@ public class ReservationController {
         return modelAndView;
     }
 
+    /**
+     * Método al que se le llama al realizar una petición Post con la url de /userBookings/{id}
+     * @param id código identificativo de la reserva a eliminar
+     * @return Devuelve la vista con las reservar del usuario logeado sin la recién eliminada
+     */
     @PostMapping("/userBookings/{id}")
     public ModelAndView deleteBookings(@PathVariable UUID id){
-
-        System.out.println("El Id recibido es: ");
-        System.out.println(id);
 
         reservationService.deleteReservationById(id);
 
@@ -250,6 +289,10 @@ public class ReservationController {
         return modelAndView;
     }
 
+    /**
+     * Atributo general para saber quién es el usuario logeado
+     * @return devuelve el usuario logeado en la aplicación en ese momento
+     */
     @ModelAttribute("loggedinUser")
     public User globalUserObject(Model model) {
 

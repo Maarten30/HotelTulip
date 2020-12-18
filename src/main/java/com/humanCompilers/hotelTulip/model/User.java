@@ -14,6 +14,10 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
 
+/**
+ * Clase que representa un usuario dentro de la aplicación
+ * @author HumanCompilers
+ */
 @NoArgsConstructor
 @Setter
 @Entity
@@ -48,6 +52,18 @@ public class User implements UserDetails {
     private boolean isEnabled;
 
 
+    /**
+     * Atributos que tiene el usuario
+     * @param firstname nombre
+     * @param lastname apellido
+     * @param username nombre de usuario, email
+     * @param password contraseña
+     * @param grantedAuthorities permisos del usuario
+     * @param isAccountNonExpired cuenta caducada
+     * @param isAccountNonLocked cuenta bloqueada
+     * @param isCredentialsNonExpired  credenciales no caducados
+     * @param isEnabled permitida
+     */
     public User (String firstname,
                  String lastname,
                  String username,

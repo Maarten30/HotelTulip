@@ -8,6 +8,10 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.UUID;
 
+/**
+ * Clase padre de habitación y sala dentro de la aplicaicón
+ * @author HumanCompilers
+ */
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,6 +24,10 @@ public abstract class Room {
     @Column(columnDefinition = "BINARY(16)")
     private UUID id;
 
+    /**
+     * Constructor de la clase
+     * @param id identificador de la habitación o sala
+     */
     public Room (UUID id) {
         this.id = id;
 

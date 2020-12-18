@@ -8,7 +8,7 @@ Además, se puede consultar la disponibilidad de todas ellas para una fecha conc
 
 ## Ejecución de la aplicación
 ```
-mvn [clean | validate | compile | exec:java | test]
+mvn [clean | validate | compile | spring-boot:run | test]
 ```
 1. ```mvn clean```: Elimina cualquier archivo creado fuera de la ejecución.
 
@@ -16,7 +16,7 @@ mvn [clean | validate | compile | exec:java | test]
 
 3. ```mvn compile```: Compila y carga el archivo pom.xml.
 
-4. ```mvn exec:java ```: Ejecuta la aplicación.
+4. ```mvn spring-boot:run ```: Ejecuta la aplicación.
 
 ### Ejecución de los tests
 
@@ -44,8 +44,8 @@ Las funcionalidades principales del hotel son:
     * Información sobre ubicación y datos de contacto
 
 ## Construido con
-* [Maven](https://maven.apache.org/) - Gestión de Dependencias
-* [SpringBoot](https://spring.io/projects/spring-boot) - 
+* [Maven](https://maven.apache.org/) 
+* [SpringBoot](https://spring.io/projects/spring-boot)  
 
 ## Autores
 * **Gabriela Garaizabal** (https://github.com/gabrigaraizabal)

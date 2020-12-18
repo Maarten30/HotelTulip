@@ -11,6 +11,10 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * Clase que representa una reserva dentro de la aplicación
+ * @author HumanCompilers
+ */
 @Getter
 @Setter
 @NoArgsConstructor
@@ -36,6 +40,13 @@ public class Reservation {
     private Room reservedRoom;
     private Double totalPrice;
 
+    /**
+     * Atributos de la reserva
+     * @param id identificador de la reserva
+     * @param checkinDate fecha de comienzo de la reserva
+     * @param checkoutDate fecha de finalización de la reserva
+     * @param reservedRoom Habitación reservada
+     */
     public Reservation( UUID id, LocalDate checkinDate, LocalDate checkoutDate, Room reservedRoom) {
         this.id = id;
         this.checkoutDate = checkoutDate;
