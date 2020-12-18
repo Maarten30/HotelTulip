@@ -11,6 +11,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * Clase que proporciona la lógica de negocio relacionada con las reservas
+ * @HumanCompilers
+ */
 @Service
 public class ReservationService {
 
@@ -19,6 +23,13 @@ public class ReservationService {
     private final TarifaMeetingRoomService tarifaMeetingRoomService;
     private final RoomService roomService;
 
+    /**
+     * Constructor de la clase
+     * @param tarifaService Instancia de la clase tarifaService para poder hacerle llamadas
+     * @param tarifaMeetingRoomService Instancia de la clase tarifaMeetingRoomService para poder hacerle llamadas
+     * @param roomService Instancia de la clase roomService para poder hacerle llamadas
+     * @param reservationRepository Instancia de la clase reservationRepository para poder hacerle llamadas
+     */
     @Autowired
     public ReservationService(TarifaService tarifaService,
                               TarifaMeetingRoomService tarifaMeetingRoomService,
@@ -31,10 +42,18 @@ public class ReservationService {
     }
 
 
+    /**
+     * Método que sirve para guardar una reserva en la base de datos
+     * @param reservation reserva a guardar
+     */
     public Reservation addReservation(Reservation reservation) {
         return reservationRepository.save(reservation);
     }
 
+    /**
+     * Método que sirve para obtener todas las reservas existentes de la base de datos
+     * @return lista que contiene todas las reservas existentes
+     */
     public List<Reservation> getAllReservations() {
         List<Reservation> reservations =  new ArrayList<>();
         // Parse 'Iterable' to 'List'
@@ -46,13 +65,29 @@ public class ReservationService {
         return reservations;
     }
 
+    /**
+     * Método que sirve para encontrar una reserva por Id de la base de datos
+     * @param id código identificativo de la reserva
+     * @return Devuelve la reserva correspondiente al código identificativo
+     */
     public Reservation getReservationById(UUID id) { return reservationRepository.findById(id).get(); }
 
+    /**
+     * Método que sirve para eliminar una reserva de la base de datos sabiendo su Id
+     * @param id Id de la reserva a eliminar
+     */
     public int deleteReservationById(UUID id) { reservationRepository.deleteById(id); return 1; }
 
+    /**
+     * Método que sirve para eliminar todas las reservas de la base de datos
+     */
     public int deleteAllReservations() { reservationRepository.deleteAll(); return 1; }
 
-    // Si hace falta esto se podria descomponer en un metodo por atributo a actualizar
+    /**
+     * Método para modificar una reserva de la base de datos
+     * @param id identificador de la reserva a modificar
+     * @param newReservation nueva reserva a guardar
+     */
     public int updateReservationById(UUID id, Reservation newReservation) {
         // Get
         Reservation db_reservation = getReservationById(id);
@@ -66,6 +101,13 @@ public class ReservationService {
         return 1;
     }
 
+    /**
+     * Método que sirve para calcular el precio total de una reserva
+     * @param starting_date Fecha de comienzo de la reserva
+     * @param ending_date Fecha final de la reserva
+     * @param reservedRoom Habitación de hotel a reservar
+     * @return Devuelve el precio total de la reserva
+     */
     public Double calculateTotalPrice(LocalDate starting_date, LocalDate ending_date, HotelRoom reservedRoom) {
 
         boolean noErrorsInReservation = true;
@@ -94,6 +136,13 @@ public class ReservationService {
         }
     }
 
+    /**
+     * Método que sirve para calcular el precio total de la reserva
+     * @param starting_date Fecha de comienzo de la reserva
+     * @param ending_date Fecha final de la reserva
+     * @param reservedRoom Sala a reservar
+     * @return Devuelve el precio total de la reserva
+     */
     public Double calculateMeetingRoomTotalPrice(LocalDate starting_date, LocalDate ending_date, MeetingRoom reservedRoom) {
 
         boolean noErrorsInReservation = true;
@@ -123,6 +172,13 @@ public class ReservationService {
 
     }
 
+    /**
+     * Método que sirve para comprobar la disponibilidad de una habitación para unas fechas específicas
+     * @param checkin Fecha de entrada
+     * @param checkOut Fecha de salida
+     * @param hotelRoomType Tipo de habitación a reservar
+     * @return Devuelve información sobre si la habitación está disponible o no
+     */
     public HotelRoom CheckHotelRoomAvailability(LocalDate checkin, LocalDate checkOut, HotelRoomType hotelRoomType) {
 
         // Se podría mejorar cogiendo solo las habitaciones del tipo buscado
@@ -171,6 +227,13 @@ public class ReservationService {
         return freeRoom;
     }
 
+    /**
+     * Método que sirve para conocer la disponibilidad de una sala en unas fechas concretas
+     * @param checkin Fecha de entrada
+     * @param checkOut Fecha de salida
+     * @param meetingRoomType Tipo de sala a reservar
+     * @return Devuelve información sobre si la sala está disponible o no
+     */
     public MeetingRoom CheckMeetingRoomAvailability(LocalDate checkin, LocalDate checkOut, MeetingRoomType meetingRoomType) {
 
         List<MeetingRoom> rooms = roomService.getAllMeetingRooms();
@@ -218,6 +281,11 @@ public class ReservationService {
         return freeRoom;
     }
 
+    /**
+     * Método que sirve para conseguir una reserva de la base de datos corresponiente a un usuario concreto
+     * @param user Usuario del que se desea conocer las reservas
+     * @return Devuelve la lista de reservas corresponientes al usuario
+     */
     public List<Reservation> getReservationsByUser(User user){
 
         List<Reservation> reservations = reservationRepository.findAllByUser(user);

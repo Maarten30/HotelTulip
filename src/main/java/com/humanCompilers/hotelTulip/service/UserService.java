@@ -13,6 +13,10 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase que proporciona la lógica de negocio relacionada con los usuarios
+ * @HumanCompilers
+ */
 @Service
 public class UserService implements UserDetailsService {
 
@@ -20,12 +24,23 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+    /**
+     * Constructor de la clase
+     * @param userRepository Instancia de la clase userRepository para poder hacerle llamadas
+     * @param passwordEncoder parametro para codificar contraseñas
+     */
     @Autowired
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
+    /**
+     * Método que sirve para conocer al usuario que está logeado
+     * @param username email del usuario logeado
+     * @return devuelve usuario logeado
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         System.out.println("Esta entrando aqui");
@@ -41,6 +56,10 @@ public class UserService implements UserDetailsService {
         return active_user;
     }
 
+    /**
+     * Método que sirve para crear un nuevo usuario
+     * @param newUser nuevo usuario a crear
+     */
     public User createUser (User newUser)
     {
         if(!userRepository.existsById(newUser.getUsername())){
@@ -51,6 +70,10 @@ public class UserService implements UserDetailsService {
         }
     }
 
+    /**
+     * Método que sirve para obtener todos los usuarios de la base de datos
+     * @return lista de todos los usuarios
+     */
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
         Iterable<User> db_users = userRepository.findAll();

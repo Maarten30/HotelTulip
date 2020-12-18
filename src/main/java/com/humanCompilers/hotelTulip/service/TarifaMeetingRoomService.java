@@ -12,21 +12,41 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase que proporciona la lógica de negocio relacionada con las tarifas de sala
+ * @HumanCompilers
+ */
 @Service
 @NoArgsConstructor
 public class TarifaMeetingRoomService {
 
     private TarifaMeetingRoomRepository tarifaMeetingRoomRepository;
 
+    /**
+     * Constructor de la clase
+     * @param tarifaMeetingRoomRepository Instancia de la clase tarifaMeetingRoomRepository para poder hacerle llamadas
+     */
     @Autowired
     public TarifaMeetingRoomService(TarifaMeetingRoomRepository tarifaMeetingRoomRepository) {
         this.tarifaMeetingRoomRepository =  tarifaMeetingRoomRepository;
     }
 
+    /**
+     * Método que sirve para añadir la tarifa de una sala a la base de datos
+     * @param tarifa tarifa de sala a añadir a la base de datos
+     */
     public TarifaMeetingRoom addTarifaMeetingRoom(TarifaMeetingRoom tarifa) { return tarifaMeetingRoomRepository.save(tarifa); }
 
+    /**
+     * Método que sirve para obtener una tarifa de sala por id
+     * @param id identificador de la sala a obtener
+     */
     public TarifaMeetingRoom getTarifaMeetingRoomById(Integer id) { return tarifaMeetingRoomRepository.findById(id).get(); }
 
+    /**
+     * Método para obtener todas las tarifas de las salas existentes en la base de datos
+     * @return lista con todas las tarifas de las salas existentes
+     */
     public List<TarifaMeetingRoom> getAllTarifasMeetingRoom() {
 
         Iterable <TarifaMeetingRoom> tarifasDB = tarifaMeetingRoomRepository.findAll();
@@ -36,10 +56,23 @@ public class TarifaMeetingRoomService {
         });
         return tarifas;
     }
+
+    /**
+     * Método que sirve para eliminar la tarifa de una sala por id
+     * @param id identificador de la tarifa de la sala a eliminar
+     */
     public int deleteTarifaMeetingRoomById(Integer id) { tarifaMeetingRoomRepository.deleteById(id); return 1;}
 
+    /**
+     * Método que sirve para eliminar todas las tarifas de salas existentes de la base de datos
+     */
     public int deleteAllTarifasMeetingRoom() { tarifaMeetingRoomRepository.deleteAll(); return 1; }
 
+    /**
+     * Método que sirve para actualizar la tarifa de una sala
+     * @param id identificador de la tarifa de sala a actualizar
+     * @param newTarifa nueva tarifa de sala a insertar en la base de datos
+     */
     public TarifaMeetingRoom updateTarifa(Integer id, TarifaMeetingRoom newTarifa) {
         TarifaMeetingRoom db_tarifa = getTarifaMeetingRoomById(id);
 
@@ -51,7 +84,12 @@ public class TarifaMeetingRoomService {
         return tarifaMeetingRoomRepository.save(db_tarifa);
     }
 
-
+    /**
+     * Método que sirve para calcular la tarifa correspodiente a una fecha y sala concreta
+     * @param date fecha
+     * @param room sala
+     * @return tarifa corresponiente a fecha y sala
+     */
     public TarifaMeetingRoom calculateMeetingRoomTarifa(LocalDate date, MeetingRoom room) {
 
         Iterable<TarifaMeetingRoom> tarifas_db = tarifaMeetingRoomRepository.findAll(); // Convertir a List
