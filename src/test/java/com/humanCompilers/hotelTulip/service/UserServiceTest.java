@@ -22,6 +22,10 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+/**
+ * Clase que realiza el testeo de la lógica de negocio relacionada con los usuarios
+ * @author Human Compilers
+ */
 @ExtendWith(SpringExtension.class)
 class UserServiceTest {
 
@@ -36,6 +40,9 @@ class UserServiceTest {
     static User user_2;
 
 
+    /**
+     * Método que sirve para inicializar todas las variables a utilizar en la clase
+     */
     @BeforeAll
     public static void init(){
         // Initialize UserService
@@ -54,6 +61,10 @@ class UserServiceTest {
         user_2.setUsername("gabrigara");
     }
 
+    /**
+     * Método que sirve para comprobar que el método para obtener todos usuarios de la base de datos
+     * funciona correctamente
+     */
     @Test
     @PerfTest(invocations = 1000, threads = 20)
     @Required(max = 1200, average = 250)
@@ -66,6 +77,9 @@ class UserServiceTest {
         assertEquals(2, userService.getAllUsers().size());
     }
 
+    /**
+     * Método que sirve para comprobar que el método que crea usuarios funciona correctamente
+     */
     @Test
     @PerfTest(invocations = 1000, threads = 20)
     @Required(max = 1200, average = 250)
@@ -77,6 +91,10 @@ class UserServiceTest {
         assertEquals(user_1, usuario_prueba);
     }
 
+    /**
+     * Método que sirve para comprobar que cuando se va a crear un usuario con un email ya existente no se guarda
+     * y el método devuelve un null
+     */
     @Test
     @PerfTest(invocations = 1000, threads = 20)
     @Required(max = 1200, average = 250)
@@ -86,6 +104,9 @@ class UserServiceTest {
         assertEquals(null, userService.createUser(user_1));
     }
 
+    /**
+     * Método que sirve para comprobar que el método de logear usuario funciona correctamente
+     */
     @Test
     @PerfTest(invocations = 1000, threads = 20)
     @Required(max = 1200, average = 250)

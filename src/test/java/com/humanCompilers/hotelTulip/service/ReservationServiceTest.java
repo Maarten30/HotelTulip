@@ -17,6 +17,10 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+/**
+ * Clase que realiza el testeo de la lógica de negocio relacionada con reservas
+ * @author Human Compilers
+ */
 @ExtendWith(SpringExtension.class)
 class ReservationServiceTest {
 
@@ -36,7 +40,9 @@ class ReservationServiceTest {
     static HotelRoom hotelRoom_2;
 
 
-    // Inicializas las varibles que vayas a necesitar
+    /**
+     * Método que sirve para inicializar todas las variables a utilizar en la clase
+     */
     @BeforeAll
     public static void init(){
         // Reservation Service
@@ -65,6 +71,9 @@ class ReservationServiceTest {
         reservation_2.setId(UUID.randomUUID());
     }
 
+    /**
+     * Método que sirve para testear si todas las reservas se reciben correctamente de la base de datos
+     */
     @Test
     void getAllReservations() {
         // Le dices que cuando llame al metodo 'reservationRepository.findAll()' devuelva una lista específica
@@ -75,6 +84,9 @@ class ReservationServiceTest {
         assertEquals(2, reservationService.getAllReservations().size());
     }
 
+    /**
+     * Método que sirve para testear que las reservas se guardan correctamente
+     */
     @Test
     void addReservation() {
 
@@ -87,6 +99,9 @@ class ReservationServiceTest {
         assertEquals(reservation_1.getCheckinDate(), fecha);
     }
 
+    /**
+     * Método que testea si el cálculo del precio total de una reserva de una habitación se hace correctamente
+     */
     @Test
     void calculateTotalPrice() {
 
@@ -100,6 +115,10 @@ class ReservationServiceTest {
         assertEquals(TotalPrice, 480.0, 0.0);
     }
 
+    /**
+     * Método que sirve para testear que el precio total de una reserva de una habitación se calcula correctamente si las fechas
+     * insertadas en la aplicación no siguen un orden lógico en el tiempo
+     */
     @Test
     void calculateTotalPriceInverseDates() {
 
@@ -113,6 +132,9 @@ class ReservationServiceTest {
         assertEquals(null, TotalPrice);
     }
 
+    /**
+     * Método que testea si el cálculo del precio total de una reserva de una sala se hace correctamente
+     */
     @Test
     void calculateMeetingRoomTotalPrice() {
         TarifaMeetingRoom  tarifa = new TarifaMeetingRoom();
@@ -125,6 +147,9 @@ class ReservationServiceTest {
         assertEquals( 480.0, TotalPrice, 0.0);
     }
 
+    /**
+     * Método que sirve para testear si una habitación de hotel está disponible para las fechas solicitadas
+     */
     @Test
     void CheckHotelRoomAvailability() {
 

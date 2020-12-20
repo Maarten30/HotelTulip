@@ -18,6 +18,10 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+/**
+ * Clase que realiza el testeo de la lógica de negocio relacionada con las tarifas de las salas
+ * @author Human Compilers
+ */
 @ExtendWith(SpringExtension.class)
 class TarifaMeetingRoomServiceTest {
 
@@ -30,6 +34,9 @@ class TarifaMeetingRoomServiceTest {
 
     static MeetingRoom room;
 
+    /**
+     * Método que sirve para inicializar todas las variables a utilizar en la clase
+     */
     @BeforeAll
     public static void init() {
         tarifaMeetingRoomService = new TarifaMeetingRoomService(tarifaMeetingRoomRepository);
@@ -52,6 +59,10 @@ class TarifaMeetingRoomServiceTest {
         room.setMeetingRoomType(MeetingRoomType.LARGE);
     }
 
+    /**
+     * Método que sirve para comprobar si el método que guarda la tarifa de una sala en la base de datos
+     * funciona correctamente
+     */
     @Test
     void addTarifaMeetingRoom() {
         when(tarifaMeetingRoomRepository.save(any())).thenReturn(tarifa_1);
@@ -62,6 +73,9 @@ class TarifaMeetingRoomServiceTest {
         assertEquals(tarifa_1.getStarting_date(), fecha);
     }
 
+    /**
+     * Método que sirve para comprobar que el método para cálcular la tarifa de una sala funciona correctamente
+     */
     @Test
     void calculateMeetingRoomTarifa() {
         when(tarifaMeetingRoomRepository.findAll()).thenReturn(Stream.of(
@@ -74,6 +88,10 @@ class TarifaMeetingRoomServiceTest {
         assertEquals(tarifa_1,tarifResult);
     }
 
+    /**
+     * Método que sirve para comprobar que el método para obtener todas las tarifas de sala de la base de datos
+     * funciona correctamente
+     */
     @Test
     void getAllTarifasMeetingRoom() {
         when(tarifaMeetingRoomRepository.findAll()).thenReturn(Stream.of(

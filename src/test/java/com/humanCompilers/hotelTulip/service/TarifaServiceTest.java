@@ -18,6 +18,10 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+/**
+ * Clase que realiza el testeo de la lógica de negocio relacionada con las tarifas de las habitaciones
+ * @author Human Compilers
+ */
 @ExtendWith(SpringExtension.class)
 class TarifaServiceTest {
 
@@ -32,7 +36,9 @@ class TarifaServiceTest {
 
     static HotelRoom room;
 
-
+    /**
+     * Método que sirve para inicializar todas las variables a utilizar en la clase
+     */
     @BeforeAll
     public static void init() {
         tarifaService = new TarifaService(tarifaRepository);
@@ -55,6 +61,10 @@ class TarifaServiceTest {
         room.setHotelRoomType(HotelRoomType.DOUBLE);
     }
 
+    /**
+     * Método que sirve para comprobar que el método para obtener todas las tarifas de habitación de la base de datos
+     * funciona correctamente
+     */
     @Test
     void getAllTarifas() {
 
@@ -65,6 +75,10 @@ class TarifaServiceTest {
         assertEquals(2, tarifaService.getAllTarifas().size());
     }
 
+    /**
+     * Método que sirve para comprobar si el método que guarda la tarifa de una habitación en la base de datos
+     * funciona correctamente
+     */
     @Test
     void addTarifa() {
 
@@ -76,6 +90,9 @@ class TarifaServiceTest {
         assertEquals(tarifa_1.getStarting_date(), fecha);
     }
 
+    /**
+     * Método que sirve para comprobar que el método para cálcular la tarifa de una sala funciona correctamente
+     */
     @Test
     void calculateHotelRoomTarifa() {
         when(tarifaRepository.findAll()).thenReturn(Stream.of(

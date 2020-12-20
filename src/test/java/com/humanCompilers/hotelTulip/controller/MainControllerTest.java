@@ -20,6 +20,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
+/**
+ * Clase que realiza el testeo del controller principal de la aplicación
+ * @author Human Compilers
+ */
 @SpringBootTest
 @AutoConfigureMockMvc
 class MainControllerTest {
@@ -36,6 +40,9 @@ class MainControllerTest {
     static Tarifa tarifa1;
     static TarifaMeetingRoom tarifa2;
 
+    /**
+     * Método que sirve para inicializar todas las variables a utilizar en la clase
+     */
     @BeforeAll
     public static void init() {
         tarifa1 = new Tarifa();
@@ -49,6 +56,10 @@ class MainControllerTest {
         tarifa2.setPrice(150.0);
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void index() throws Exception {
         this.mockMvc.perform(get("/"))
@@ -56,6 +67,10 @@ class MainControllerTest {
                 .andExpect(view().name("index"));
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     void tarifas() throws Exception {
         String tarifa1Str = tarifa1.getSeason().getSeason().toLowerCase() + "_" + tarifa1.getRoom_type().getRoomType().toLowerCase();
@@ -77,6 +92,10 @@ class MainControllerTest {
                 .andExpect(model().attributeExists(tarifa2Str));
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     void contact() throws Exception{
         this.mockMvc.perform(get("/contact"))
@@ -84,6 +103,10 @@ class MainControllerTest {
                 .andExpect(view().name("contact"));
     }
 
+    /**
+     * 
+     * @throws Exception
+     */
     @Test
     void cookies() throws Exception {
         this.mockMvc.perform(get("/privacyPolicy"))

@@ -18,6 +18,10 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.mockito.ArgumentMatchers.any;
 
+/**
+ * Clase que realiza el testeo de la lógica de negocio relacionada con las habitaciones
+ * @author Human Compilers
+ */
 @ExtendWith(SpringExtension.class)
 class RoomServiceTest {
 
@@ -33,6 +37,9 @@ class RoomServiceTest {
     static MeetingRoom meetingRoom_1;
     static MeetingRoom meetingRoom_2;
 
+    /**
+     * Método que sirve para inicializar todas las variables a utilizar en la clase
+     */
     @BeforeAll
     public static void init() {
         roomService = new RoomService(roomRepository, hotelRoomRepository, meetingRoomRepository);
@@ -52,6 +59,9 @@ class RoomServiceTest {
     }
 
 
+    /**
+     * Método que sirve para comprobar que una habitación de hotel se guarda correctamente en la base de datos
+     */
     @Test
     void addHotelRoom() {
         when(hotelRoomRepository.save(any())).thenReturn(hotelRoom_1);
@@ -62,6 +72,9 @@ class RoomServiceTest {
         assertEquals(hotelRoom_1.getHotelRoomType(), hotelRoomType);
     }
 
+    /**
+     * Método que sirve para testear si funciona el método de obtener todas las habitaciones de la base de datos
+     */
     @Test
     void getAllHotelRooms() {
         when(hotelRoomRepository.findAll()).thenReturn(Stream.of(
@@ -71,6 +84,9 @@ class RoomServiceTest {
         assertEquals(2, roomService.getAllHotelRooms().size());
     }
 
+    /**
+     * Método que sirve para comprobar si se inserta correctamente una sala en la base de datos
+     */
     @Test
     void addMeetingRoom() {
         when(meetingRoomRepository.save(any())).thenReturn(meetingRoom_1);
@@ -81,6 +97,9 @@ class RoomServiceTest {
         assertEquals(meetingRoom_1.getMeetingRoomType(), meetingRoomType);
     }
 
+    /**
+     * Método que sirve para testear si funciona el método de obtener todas las salas de la base de datos
+     */
     @Test
     void getAllMeetingRooms() {
         when(meetingRoomRepository.findAll()).thenReturn(Stream.of(
@@ -90,6 +109,10 @@ class RoomServiceTest {
         assertEquals(2, roomService.getAllMeetingRooms().size());
     }
 
+    /**
+     * Método que sirve para testear si funciona el método de obtener todas las habitaciones
+     * y salas de la base de datos
+     */
     @Test
     void getAllRooms() {
         when(roomRepository.findAll()).thenReturn(Stream.of(
