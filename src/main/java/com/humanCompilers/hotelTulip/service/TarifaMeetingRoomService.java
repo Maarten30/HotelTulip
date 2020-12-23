@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * Clase que proporciona la lógica de negocio relacionada con las tarifas de sala
- * @HumanCompilers
+ * @author HumanCompilers
  */
 @Service
 @NoArgsConstructor
