@@ -621,3 +621,11 @@ h3{
 .infoRes{
     margin-right: 20px;
 }
+
+.chart {
+    width: 1000px;
+    height:700px;
+    responsive:true;
+    maintainAspectRatio: false;
+    margin: 0 auto;
+}
