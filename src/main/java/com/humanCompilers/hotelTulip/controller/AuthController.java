@@ -77,7 +77,6 @@ public class AuthController {
         newUser.setAccountNonLocked(true);
         newUser.setCredentialsNonExpired(true);
         newUser.setEnabled(true);
-        System.out.println(newUser);
 
         User prueba = userService.createUser(newUser);
 
@@ -85,11 +84,9 @@ public class AuthController {
 
         if(prueba != null)
         {
-            System.out.println(prueba);
             modelAndView.setViewName("login");
-            System.out.println(newUser.getUsername());
         } else{
-            System.out.println("soy null");
+
             modelAndView.setViewName("create_account");
             User newUser1 = new User();
             modelAndView.addObject("newUser", newUser1);

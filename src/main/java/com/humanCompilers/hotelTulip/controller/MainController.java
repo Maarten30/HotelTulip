@@ -68,8 +68,7 @@ public class MainController {
         List<Tarifa> lista_tarifas = tarifaService.getAllTarifas();
         List<TarifaMeetingRoom> lista_tarifas_meeting = tarifaMeetingRoomService.getAllTarifasMeetingRoom();
 
-        lista_tarifas.stream().forEach((t) -> {
-            System.out.println(t.getSeason().getSeason().toLowerCase() + "_" + t.getRoom_type().getRoomType().toLowerCase());
+        lista_tarifas.stream().forEach((t) -> { ;
 
             modelAndView.addObject(
                     t.getSeason().getSeason().toLowerCase() +
@@ -79,7 +78,6 @@ public class MainController {
         });
 
         lista_tarifas_meeting.stream().forEach((p) -> {
-            System.out.println(p.getSeason().getSeason().toLowerCase() + "_" + p.getRoom_type().getMeetingRoomType().toLowerCase());
 
             modelAndView.addObject(
                     p.getSeason().getSeason().toLowerCase() +

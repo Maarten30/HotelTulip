@@ -58,7 +58,6 @@ public class ReservationService {
         List<Reservation> reservations =  new ArrayList<>();
         // Parse 'Iterable' to 'List'
         Iterable<Reservation> reservas_db = reservationRepository.findAll();
-        System.out.println(reservas_db);
         reservas_db.forEach(r -> {
             reservations.add(r);
         });
@@ -237,9 +236,7 @@ public class ReservationService {
     public MeetingRoom CheckMeetingRoomAvailability(LocalDate checkin, LocalDate checkOut, MeetingRoomType meetingRoomType) {
 
         List<MeetingRoom> rooms = roomService.getAllMeetingRooms();
-        System.out.println(rooms);
         List<Reservation> reservations = getAllReservations();
-        System.out.println(reservations);
         MeetingRoom freeRoom = null;
 
         List<MeetingRoom> rooms_cloned = new ArrayList<>();
@@ -289,7 +286,6 @@ public class ReservationService {
     public List<Reservation> getReservationsByUser(User user){
 
         List<Reservation> reservations = reservationRepository.findAllByUser(user);
-        System.out.println(reservations);
         return reservations;
 
     }

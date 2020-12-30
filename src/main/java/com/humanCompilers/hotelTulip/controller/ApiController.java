@@ -94,7 +94,6 @@ public class ApiController {
      */
     @GetMapping("/getReservation")
     public Reservation getReservation(@RequestParam("id") UUID id) {
-        System.out.println(id);
         return reservationService.getReservationById(id);
     }
 
@@ -123,7 +122,6 @@ public class ApiController {
      */
     @DeleteMapping("/deleteTarifa")
     public String deleteTarifaById(@RequestParam("id") Integer id) {
-        System.out.println(id);
         tarifaService.deleteTarifa(id);
         return "Se ha borrado la tarifa escogida";
     }
@@ -163,7 +161,6 @@ public class ApiController {
      */
     @DeleteMapping("/deleteTarifa_meeting_room")
     public String deleteTarifaMeetingRoomById(@RequestParam("id") Integer id) {
-        System.out.println(id);
         tarifaMeetingRoomService.deleteTarifaMeetingRoomById(id);
         return "Se ha borrado la tarifa escogida";
     }
@@ -195,7 +192,6 @@ public class ApiController {
      */
     @DeleteMapping("/deleteRooms")
     public String deleteRoomById(@RequestParam("id") UUID id) {
-        System.out.println(id);
         roomService.deleteRoomById(id);
         return "Se ha borrado la habitación";
     }
@@ -237,7 +233,6 @@ public class ApiController {
      */
     @DeleteMapping("/deleteHotelRoomById")
     public String deleteHotelRoomById(@RequestParam("id") UUID id) {
-        System.out.println(id);
         roomService.deleteHotelRoomById(id);
         return "Se ha borrado la habitación de hotel escogida";
     }
@@ -249,7 +244,6 @@ public class ApiController {
      */
     @DeleteMapping("/deleteMeetingRoomById")
     public String deleteMeetingRoomById(@RequestParam("id") UUID id) {
-        System.out.println(id);
         roomService.deleteMeetingRoomById(id);
         return "Se ha borrado la sala de reuniones escogida";
     }

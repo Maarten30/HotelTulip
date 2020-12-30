@@ -70,7 +70,6 @@ public class ReservationController {
 
         if(people == 1) {
             available_room = reservationService.CheckHotelRoomAvailability(checkin, checkout, HotelRoomType.SINGLE);
-            System.out.println(available_room);
         } else if(people == 2) {
             available_room = reservationService.CheckHotelRoomAvailability(checkin, checkout, HotelRoomType.DOUBLE);
         } else {
@@ -115,12 +114,10 @@ public class ReservationController {
         ModelAndView modelAndView = new ModelAndView();
 
         if(roomsAvailable && datesAreValid) {
-            System.out.println("Available room = null");
             modelAndView.setViewName("reservation_result");
             modelAndView.addObject("reservation", reservation);
         } else {
             if(!roomsAvailable) {
-                System.out.println("No disponible");
                 modelAndView.setViewName("reservation");
                 modelAndView.addObject("message", "Sorry! No room for the desired people was available");
             } else if(!datesAreValid) {
@@ -155,7 +152,6 @@ public class ReservationController {
 
         if(people == 10) {
             available_room = reservationService.CheckMeetingRoomAvailability(checkin, checkout, MeetingRoomType.SMALL);
-            System.out.println(available_room);
         } else if(people == 20) {
             available_room = reservationService.CheckMeetingRoomAvailability(checkin, checkout, MeetingRoomType.MEDIUM);
         } else {
@@ -203,12 +199,10 @@ public class ReservationController {
         ModelAndView modelAndView = new ModelAndView();
 
         if(roomsAvailable && datesAreValid) {
-            System.out.println("Available room = null");
             modelAndView.setViewName("reservation_result");
             modelAndView.addObject("reservation", reservation);
         } else {
             if(!roomsAvailable) {
-                System.out.println("No disponible");
                 modelAndView.setViewName("reservation");
                 modelAndView.addObject("message", "Sorry! No room for the desired people was available");
             } else if(!datesAreValid) {
@@ -248,7 +242,6 @@ public class ReservationController {
             username = user.toString();
         }
 
-        System.out.println(username);
 
         User usuario = new User();
         usuario.setUsername(username);

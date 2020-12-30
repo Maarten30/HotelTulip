@@ -43,10 +43,8 @@ public class UserService implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println("Esta entrando aqui");
         User active_user =  userRepository.findById(username)
                 .orElseThrow(() -> new UsernameNotFoundException(String.format("Username %s not found", username)));
-        System.out.println(active_user);
 
         active_user.setAccountNonExpired(true);
         active_user.setAccountNonLocked(true);
