@@ -35,9 +35,14 @@ class ReservationServiceTest {
 
     static Reservation reservation_1;
     static Reservation reservation_2;
+    static Reservation reservation_3;
+    static Reservation reservation_4;
 
     static HotelRoom hotelRoom_1;
     static HotelRoom hotelRoom_2;
+
+    static MeetingRoom meetingRoom_1;
+    static MeetingRoom meetingRoom_2;
 
 
     /**
@@ -57,6 +62,15 @@ class ReservationServiceTest {
         hotelRoom_2.setHotelRoomType(HotelRoomType.DOUBLE);
         hotelRoom_2.setId(UUID.randomUUID());
 
+        // MeetingRoom 1
+        meetingRoom_1 = new MeetingRoom();
+        meetingRoom_1.setMeetingRoomType(MeetingRoomType.SMALL);
+        meetingRoom_1.setId(UUID.randomUUID());
+        // MeetingRoom 2
+        meetingRoom_2 = new MeetingRoom();
+        meetingRoom_2.setMeetingRoomType(MeetingRoomType.MEDIUM);
+        meetingRoom_2.setId(UUID.randomUUID());
+
         // Reservation 1
         reservation_1 = new Reservation();
         reservation_1.setCheckinDate(LocalDate.of(2020, 11, 17));
@@ -69,6 +83,18 @@ class ReservationServiceTest {
         reservation_2.setCheckoutDate(LocalDate.of(2020, 12, 18));
         reservation_2.setReservedRoom(hotelRoom_2);
         reservation_2.setId(UUID.randomUUID());
+        // Reservation 3
+        reservation_3 = new Reservation();
+        reservation_3.setCheckinDate(LocalDate.of(2020, 11, 17));
+        reservation_3.setCheckoutDate(LocalDate.of(2020, 11, 30));
+        reservation_3.setReservedRoom(meetingRoom_1);
+        reservation_3.setId(UUID.randomUUID());
+        // Reservation 4
+        reservation_4 = new Reservation();
+        reservation_4.setCheckinDate(LocalDate.of(2020, 12, 5));
+        reservation_4.setCheckoutDate(LocalDate.of(2020, 12, 18));
+        reservation_4.setReservedRoom(meetingRoom_2);
+        reservation_4.setId(UUID.randomUUID());
     }
 
     /**
@@ -165,6 +191,27 @@ class ReservationServiceTest {
                 LocalDate.of(2020, 12, 4), HotelRoomType.DOUBLE);
 
        assertEquals(hotelRoom_2.getId(), hotelRoom.getId());
+
+    }
+
+    /**
+     * Método que sirve para testear si una habitación de hotel está disponible para las fechas solicitadas
+     */
+    @Test
+    void CheckMeetingRoomAvailability() {
+
+        when(roomService.getAllMeetingRooms()).thenReturn(Stream.of(
+                meetingRoom_1, meetingRoom_2
+        ).collect(Collectors.toList()));
+
+        when(reservationService.getAllReservations()).thenReturn(Stream.of(
+                reservation_1, reservation_2, reservation_3, reservation_4
+        ).collect(Collectors.toList()));
+
+        MeetingRoom meetingRoom = reservationService.CheckMeetingRoomAvailability(LocalDate.of(2020, 12, 2),
+                LocalDate.of(2020, 12, 4), MeetingRoomType.SMALL);
+
+        assertEquals(meetingRoom_1.getId(), meetingRoom.getId());
 
     }
 }

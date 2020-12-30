@@ -277,8 +277,6 @@ public class ReservationController {
             username = user.toString();
         }
 
-        System.out.println(username);
-
         User usuario = new User();
         usuario.setUsername(username);
         List<Reservation> reservations = reservationService.getReservationsByUser(usuario);

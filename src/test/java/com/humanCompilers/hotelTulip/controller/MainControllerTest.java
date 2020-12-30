@@ -57,7 +57,7 @@ class MainControllerTest {
     }
 
     /**
-     *
+     * Comprueba que el método de index() devuelve la vista "index" asociada
      * @throws Exception
      */
     @Test
@@ -68,7 +68,8 @@ class MainControllerTest {
     }
 
     /**
-     *
+     * Comprueba que el método de tarifas() devuelve la vista "prices" asociada y que
+     * además contiene los datos necesarios
      * @throws Exception
      */
     @Test
@@ -93,7 +94,7 @@ class MainControllerTest {
     }
 
     /**
-     *
+     * Comprueba que el método de contact() devuelve la vista "contact" asociada
      * @throws Exception
      */
     @Test
@@ -104,7 +105,7 @@ class MainControllerTest {
     }
 
     /**
-     * 
+     * Comprueba que el método de cookies() devuelve la vista "cookies" asociada
      * @throws Exception
      */
     @Test
